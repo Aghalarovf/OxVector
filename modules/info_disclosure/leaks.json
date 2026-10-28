@@ -1,0 +1,372 @@
+{
+  "rules": [
+    {
+      "category": "version",
+      "title": "Server Version in Header",
+      "headers": [
+        "server"
+      ],
+      "severity": "low",
+      "hint": "Version banners let attackers match the server against known CVEs",
+      "pattern": "\\d+\\.\\d+",
+      "evidence": "Server: {value}"
+    },
+    {
+      "category": "version",
+      "title": "Operating System in Server Header",
+      "headers": [
+        "server"
+      ],
+      "severity": "low",
+      "hint": "Operating system and distribution details narrow down exploitable packages and kernel issues",
+      "pattern": "\\((?:Ubuntu|Debian|CentOS|Fedora|Red Hat[^)]*|Amazon[^)]*|FreeBSD|OpenBSD|NetBSD|Unix|Linux[^)]*|SUSE[^)]*|Oracle[^)]*|Win32|Win64|Win\\d+)\\)",
+      "evidence": "Server: {value}"
+    },
+    {
+      "category": "version",
+      "title": "Server Modules and Versions in Header",
+      "headers": [
+        "server"
+      ],
+      "severity": "low",
+      "hint": "Module and library versions in the banner can be matched against known vulnerabilities",
+      "pattern": "\\b(?:OpenSSL|mod_[a-z_]+|PHP|Phusion_Passenger|Python|Perl|Ruby|JRuby|JBoss|Mono|FrontPage|DAV)/[\\d.]+",
+      "evidence": "Server: {value}"
+    },
+    {
+      "category": "technology",
+      "title": "{header} Header",
+      "headers": [
+        "x-powered-by",
+        "x-aspnet-version",
+        "x-aspnetmvc-version",
+        "x-generator",
+        "x-runtime",
+        "x-drupal-cache",
+        "x-turbo-charged-by",
+        "x-pingback",
+        "x-redirect-by",
+        "x-powered-cms",
+        "x-drupal-dynamic-cache",
+        "x-magento-cache-debug",
+        "x-litespeed-cache",
+        "x-symfony-cache",
+        "x-rack-cache",
+        "x-application-context",
+        "microsoftsharepointteamservices",
+        "x-sharepointhealthscore",
+        "x-owa-version",
+        "x-feserver",
+        "x-jenkins",
+        "x-hudson",
+        "x-jenkins-cli-port",
+        "x-jenkins-session",
+        "x-powered-by-plesk"
+      ],
+      "severity": "low",
+      "hint": "Technology and version headers fingerprint the backend stack"
+    },
+    {
+      "category": "debug",
+      "title": "Debug Header Exposed",
+      "headers": [
+        "x-debug-token",
+        "x-debug-token-link",
+        "x-symfony-profiler",
+        "x-debug",
+        "x-request-debug",
+        "x-php-debug"
+      ],
+      "severity": "medium",
+      "hint": "Debug tokens and profiler links can expose request internals; check the linked profiler endpoint",
+      "evidence": "{header} present in response"
+    },
+    {
+      "category": "debug",
+      "title": "Source File Paths Exposed in Header",
+      "headers": [
+        "x-sourcefiles"
+      ],
+      "severity": "medium",
+      "hint": "Visual Studio Browser Link header discloses encoded server-side source file paths; the site is running in debug mode",
+      "evidence": "{header} present in response"
+    },
+    {
+      "category": "backend",
+      "title": "Backend Server Identity Header",
+      "headers": [
+        "x-backend-server",
+        "x-backend",
+        "x-upstream",
+        "x-origin-server",
+        "x-forwarded-server",
+        "x-hostname",
+        "x-server"
+      ],
+      "severity": "low",
+      "hint": "Backend hostnames reveal infrastructure layout and can aid targeting of origin servers"
+    },
+    {
+      "category": "backend",
+      "title": "Client or Proxy IP Header in Response",
+      "headers": [
+        "x-forwarded-for",
+        "x-real-ip",
+        "x-originating-ip",
+        "x-remote-addr",
+        "x-cluster-client-ip",
+        "x-client-ip"
+      ],
+      "severity": "low",
+      "hint": "Echoed IP headers indicate how the proxy chain trusts client-supplied addresses; test IP-based access controls for spoofing"
+    },
+    {
+      "category": "backend",
+      "title": "Proxy Chain Disclosed in Via Header",
+      "headers": [
+        "via"
+      ],
+      "severity": "info",
+      "hint": "Via reveals intermediate proxies, cache software and sometimes versions or internal hostnames"
+    },
+    {
+      "category": "infrastructure",
+      "title": "{header} Infrastructure Header",
+      "headers": [
+        "x-amz-request-id",
+        "x-amz-id-2",
+        "x-amz-cf-id",
+        "x-amz-cf-pop",
+        "x-amzn-requestid",
+        "x-amzn-trace-id",
+        "x-azure-ref",
+        "x-ms-request-id",
+        "x-goog-generation",
+        "x-guploader-uploadid",
+        "x-served-by",
+        "x-vercel-id",
+        "x-vercel-cache",
+        "x-nf-request-id",
+        "x-nextjs-cache",
+        "x-envoy-upstream-service-time",
+        "x-kong-upstream-latency",
+        "x-kong-proxy-latency",
+        "x-oracle-dms-ecid",
+        "x-oracle-dms-rid",
+        "x-akamai-transformed",
+        "x-cache-hits",
+        "x-fastly-request-id",
+        "cf-ray"
+      ],
+      "severity": "info",
+      "hint": "Infrastructure headers reveal the CDN, cloud provider or proxy layers in front of the application"
+    },
+    {
+      "category": "infrastructure",
+      "title": "Server-Timing Header Exposes Internals",
+      "headers": [
+        "server-timing"
+      ],
+      "severity": "info",
+      "hint": "Timing metrics can reveal backend components, database calls and processing stages"
+    },
+    {
+      "category": "infrastructure",
+      "title": "ETag Reveals File Inode",
+      "headers": [
+        "etag"
+      ],
+      "severity": "low",
+      "hint": "Apache-style inode-size-mtime ETags leak file system inode numbers and modification times",
+      "pattern": "^(?:W/)?\\\"?[0-9a-f]{4,}-[0-9a-f]{3,}-[0-9a-f]{6,}\\\"?$",
+      "evidence": "{header}: {value}"
+    },
+    {
+      "category": "sourcemap",
+      "title": "Source Map Header",
+      "headers": [
+        "sourcemap",
+        "x-sourcemap"
+      ],
+      "severity": "info",
+      "hint": "Source maps expose original source code, comments and internal paths"
+    },
+    {
+      "category": "content",
+      "title": "Internal IP in Response Header",
+      "headers": [
+        "*"
+      ],
+      "severity": "low",
+      "hint": "Internal addressing reveals network layout and backend hosts",
+      "pattern": "\\b(?:10\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}|192\\.168\\.\\d{1,3}\\.\\d{1,3}|172\\.(?:1[6-9]|2\\d|3[01])\\.\\d{1,3}\\.\\d{1,3})\\b",
+      "evidence": "{header} contains private address {match}",
+      "ignore_headers": [
+        "set-cookie",
+        "date",
+        "content-security-policy",
+        "content-security-policy-report-only"
+      ]
+    },
+    {
+      "category": "content",
+      "title": "Private IPv6 Address in Response Header",
+      "headers": [
+        "*"
+      ],
+      "severity": "low",
+      "hint": "Internal addressing reveals network layout and backend hosts",
+      "pattern": "\\b(?:fd[0-9a-f]{2}|fc[0-9a-f]{2}|fe80):(?:[0-9a-f]{0,4}:){1,6}[0-9a-f]{0,4}\\b",
+      "evidence": "{header} contains private IPv6 address {match}",
+      "ignore_headers": [
+        "set-cookie",
+        "date",
+        "content-security-policy",
+        "content-security-policy-report-only"
+      ]
+    },
+    {
+      "category": "content",
+      "title": "Internal Hostname in Response Header",
+      "headers": [
+        "*"
+      ],
+      "severity": "low",
+      "hint": "Internal hostnames reveal naming conventions and reachable backends for SSRF or lateral movement",
+      "pattern": "\\b[a-z0-9][a-z0-9\\-]*(?:\\.[a-z0-9\\-]+)*\\.(?:internal|intranet|corp|lan|localdomain|local|svc\\.cluster\\.local|cluster\\.local)\\b",
+      "evidence": "{header} contains internal hostname {match}",
+      "ignore_headers": [
+        "set-cookie",
+        "date",
+        "content-security-policy",
+        "content-security-policy-report-only"
+      ]
+    },
+    {
+      "category": "content",
+      "title": "Server File Path in Response Header",
+      "headers": [
+        "*"
+      ],
+      "severity": "low",
+      "hint": "File system paths reveal deployment layout and usernames",
+      "pattern": "(?:/var/www|/home/[\\w.\\-]+|/usr/(?:local|share)/[\\w.\\-]+|/opt/[\\w.\\-]+|[A-Za-z]:\\\\+(?:inetpub|Users|Windows|xampp|wamp)[\\w\\\\.\\-]*)",
+      "evidence": "{header} contains path {match}",
+      "ignore_headers": [
+        "set-cookie",
+        "date",
+        "content-security-policy",
+        "content-security-policy-report-only"
+      ]
+    },
+    {
+      "category": "content",
+      "title": "Credentials in URL Within Header",
+      "headers": [
+        "*"
+      ],
+      "severity": "medium",
+      "hint": "A URL with embedded username and password is exposed in a response header; treat the credentials as compromised",
+      "pattern": "\\b[a-z][a-z0-9+.\\-]*://[^/\\s:@]+:[^/\\s@]+@[^/\\s]+",
+      "evidence": "{header} contains a URL with embedded credentials",
+      "ignore_headers": [
+        "set-cookie",
+        "date",
+        "content-security-policy",
+        "content-security-policy-report-only"
+      ]
+    },
+    {
+      "category": "content",
+      "title": "AWS Access Key in Response Header",
+      "headers": [
+        "*"
+      ],
+      "severity": "high",
+      "hint": "Credentials in response headers must be treated as compromised; rotate and verify what they grant",
+      "pattern": "\\bAKIA[0-9A-Z]{16}\\b",
+      "evidence": "{header} contains an AWS access key ID",
+      "ignore_headers": [
+        "set-cookie",
+        "date",
+        "content-security-policy",
+        "content-security-policy-report-only"
+      ]
+    },
+    {
+      "category": "content",
+      "title": "JWT in Response Header",
+      "headers": [
+        "*"
+      ],
+      "severity": "info",
+      "hint": "Tokens in non-standard headers can be cached or logged by intermediaries; decode it and check claims and lifetime",
+      "pattern": "\\beyJ[A-Za-z0-9_\\-]{10,}\\.eyJ[A-Za-z0-9_\\-]{10,}\\.[A-Za-z0-9_\\-]*",
+      "evidence": "{header} contains a JWT",
+      "ignore_headers": [
+        "set-cookie",
+        "date",
+        "content-security-policy",
+        "content-security-policy-report-only",
+        "authorization"
+      ]
+    },
+    {
+      "category": "caching",
+      "title": "Cache Server Software Header",
+      "headers": [
+        "x-cache",
+        "x-cache-lookup",
+        "x-varnish",
+        "x-varnish-cache",
+        "age",
+        "cf-cache-status",
+        "x-content-digest"
+      ],
+      "severity": "info",
+      "hint": "Caching headers reveal the CDN/cache software and layer in front of the application"
+    },
+    {
+      "category": "waf",
+      "title": "WAF or Security Proxy Identity Header",
+      "headers": [
+        "x-sucuri-id",
+        "x-sucuri-cache",
+        "x-iinfo",
+        "x-denied-reason"
+      ],
+      "severity": "info",
+      "hint": "WAF identity headers reveal which protection is in front of the application, aiding bypass research"
+    },
+    {
+      "category": "auth",
+      "title": "WWW-Authenticate Header Exposed",
+      "headers": [
+        "www-authenticate"
+      ],
+      "severity": "low",
+      "hint": "Discloses the authentication scheme and sometimes an internal realm name or server identity"
+    },
+    {
+      "category": "technology",
+      "title": "{header} Header",
+      "headers": [
+        "liferay-portal",
+        "x-mod-pagespeed",
+        "x-page-speed"
+      ],
+      "severity": "low",
+      "hint": "Technology and version headers fingerprint the backend stack"
+    },
+    {
+      "category": "reporting",
+      "title": "{header} Reporting Header",
+      "headers": [
+        "nel",
+        "report-to"
+      ],
+      "severity": "info",
+      "hint": "Network error logging and reporting headers can disclose internal reporting endpoint URLs"
+    }
+  ]
+}

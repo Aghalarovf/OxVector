@@ -1,0 +1,405 @@
+{
+  "version": 1,
+  "description": "Maps serialized-data indicators to the programming language, runtime and format they originate from.",
+  "signatures": [
+    {
+      "id": "java_serialized",
+      "language": "Java",
+      "runtime": "JVM",
+      "confidence": "high",
+      "format": "Java native object serialization (java.io.Serializable)",
+      "kinds": [
+        "Java serialized object"
+      ],
+      "content_types": [
+        "application/x-java-serialized-object",
+        "application/x-java-object"
+      ],
+      "type_keys": [],
+      "viewstate": false,
+      "indicators": [
+        "Raw stream header AC ED 00 05",
+        "Base64 prefix rO0AB",
+        "Base64 prefix H4sI when the stream is gzip-wrapped"
+      ],
+      "details": "Binary stream produced by ObjectOutputStream and consumed by ObjectInputStream. It encodes class names and field values, so the receiving JVM instantiates classes chosen by the sender while reading the stream.",
+      "frameworks": [
+        "ObjectInputStream",
+        "Java RMI",
+        "JMX",
+        "JMS ObjectMessage",
+        "Spring HTTP Invoker",
+        "Session replication and clustering"
+      ],
+      "risk": "Deserializing untrusted streams can trigger gadget chains present on the classpath, leading to remote code execution, denial of service or arbitrary file access.",
+      "remediation": "Do not deserialize untrusted input natively. Use a data-only format, or enforce a class allow-list with ObjectInputFilter (JEP 290)."
+    },
+    {
+      "id": "java_xmldecoder",
+      "language": "Java",
+      "runtime": "JVM",
+      "confidence": "high",
+      "format": "java.beans.XMLDecoder XML document",
+      "kinds": [
+        "Java XMLDecoder XML"
+      ],
+      "content_types": [],
+      "type_keys": [],
+      "viewstate": false,
+      "indicators": [
+        "XML root element <java version=\"...\">",
+        "XML elements such as <object class=\"java.*\">"
+      ],
+      "details": "XML document in the java.beans.XMLDecoder format. The decoder constructs arbitrary objects and invokes the constructors and methods described by the XML elements.",
+      "frameworks": [
+        "java.beans.XMLDecoder",
+        "Custom XML import endpoints",
+        "Legacy XML-based configuration loaders"
+      ],
+      "risk": "Attacker-controlled XML can instantiate arbitrary classes and call arbitrary methods, which commonly results in remote code execution.",
+      "remediation": "Replace XMLDecoder with a binding library that maps to fixed types, and reject documents that use the java.beans format."
+    },
+    {
+      "id": "dotnet_binaryformatter",
+      "language": ".NET",
+      "runtime": "CLR",
+      "confidence": "high",
+      "format": ".NET BinaryFormatter stream",
+      "kinds": [
+        ".NET BinaryFormatter payload"
+      ],
+      "content_types": [],
+      "type_keys": [],
+      "viewstate": false,
+      "indicators": [
+        "Raw header 00 01 00 00 00 FF FF FF FF",
+        "Base64 prefix AAEAAAD/////"
+      ],
+      "details": "Binary payload produced by BinaryFormatter. It embeds assembly-qualified type names that the formatter resolves and instantiates while reading.",
+      "frameworks": [
+        "BinaryFormatter",
+        ".NET Remoting",
+        "Legacy session and cookie storage"
+      ],
+      "risk": "Microsoft documents BinaryFormatter as insecure for untrusted data; a crafted payload can lead to remote code execution.",
+      "remediation": "Migrate to a type-safe serializer such as System.Text.Json or DataContractSerializer with known types. BinaryFormatter is obsolete and unsupported in modern .NET."
+    },
+    {
+      "id": "dotnet_viewstate",
+      "language": ".NET",
+      "runtime": "ASP.NET Web Forms",
+      "confidence": "high",
+      "format": "ASP.NET ViewState (LosFormatter)",
+      "kinds": [],
+      "content_types": [],
+      "type_keys": [],
+      "viewstate": true,
+      "indicators": [
+        "Hidden form field __VIEWSTATE",
+        "Base64 prefix /wE when the state is not encrypted"
+      ],
+      "details": "Serialized page and control state that ASP.NET Web Forms round-trips through the client. Its integrity depends on ViewState MAC and the machineKey; a predictable or leaked key allows forged state to be deserialized by the server.",
+      "frameworks": [
+        "ASP.NET Web Forms",
+        "LosFormatter",
+        "ObjectStateFormatter"
+      ],
+      "risk": "With a known or weak machineKey, or with MAC disabled, forged ViewState can lead to deserialization of attacker-chosen objects.",
+      "remediation": "Keep ViewState MAC and encryption enabled, use a unique random machineKey per application, and keep the key out of source control."
+    },
+    {
+      "id": "python_pickle",
+      "language": "Python",
+      "runtime": "CPython",
+      "confidence": "high",
+      "format": "Python pickle stream",
+      "kinds": [
+        "Python pickle"
+      ],
+      "content_types": [
+        "application/x-python-pickle"
+      ],
+      "type_keys": [],
+      "viewstate": false,
+      "indicators": [
+        "Raw header 80 02 through 80 05 with trailing byte 2E",
+        "Base64 prefixes gAJ, gAN, gAS, gAV"
+      ],
+      "details": "Opcode stream produced by pickle.dumps. The unpickler can import modules and call arbitrary callables through __reduce__, so loading a pickle is equivalent to running code supplied by its author.",
+      "frameworks": [
+        "pickle",
+        "cPickle",
+        "shelve",
+        "joblib",
+        "Cache and session backends configured with pickle",
+        "Task queues configured with a pickle serializer"
+      ],
+      "risk": "Unpickling untrusted data results in arbitrary code execution.",
+      "remediation": "Never unpickle untrusted data. Use JSON or another data-only format, and authenticate any pickle that must cross a trust boundary with an HMAC."
+    },
+    {
+      "id": "ruby_marshal",
+      "language": "Ruby",
+      "runtime": "MRI",
+      "confidence": "high",
+      "format": "Ruby Marshal binary format",
+      "kinds": [
+        "Ruby Marshal data"
+      ],
+      "content_types": [],
+      "type_keys": [],
+      "viewstate": false,
+      "indicators": [
+        "Raw header 04 08",
+        "Base64 prefix BAh"
+      ],
+      "details": "Binary format produced by Marshal.dump. Marshal.load can instantiate arbitrary classes and trigger methods on them while loading.",
+      "frameworks": [
+        "Marshal",
+        "Rails legacy cookie serializer",
+        "Rails cache stores",
+        "DRb"
+      ],
+      "risk": "Loading attacker-controlled Marshal data can lead to remote code execution through gadget chains in loaded gems.",
+      "remediation": "Use JSON for sessions, cookies and caches, keep secret_key_base private, and never call Marshal.load on untrusted input."
+    },
+    {
+      "id": "php_object",
+      "language": "PHP",
+      "runtime": "Zend Engine",
+      "confidence": "high",
+      "format": "PHP serialize() object",
+      "kinds": [
+        "PHP serialized object"
+      ],
+      "content_types": [
+        "application/x-php-serialized"
+      ],
+      "type_keys": [],
+      "viewstate": false,
+      "indicators": [
+        "Text prefix O:<length>:\"<ClassName>\":<count>:{",
+        "URL-encoded or Base64-wrapped variants of the same prefix"
+      ],
+      "details": "Text format produced by serialize(). Object entries name the class and its properties; unserialize() instantiates the class and runs magic methods such as __wakeup and __destruct, which enables property-oriented programming.",
+      "frameworks": [
+        "unserialize()",
+        "Composer-loaded libraries that provide gadget classes",
+        "Phar archive metadata"
+      ],
+      "risk": "Untrusted input reaching unserialize() can lead to object injection, file operations or remote code execution depending on available classes.",
+      "remediation": "Use json_encode and json_decode. If unserialize() is unavoidable, pass allowed_classes => false and sign the data with an HMAC."
+    },
+    {
+      "id": "php_array",
+      "language": "PHP",
+      "runtime": "Zend Engine",
+      "confidence": "medium",
+      "format": "PHP serialize() array",
+      "kinds": [
+        "PHP serialized array"
+      ],
+      "content_types": [],
+      "type_keys": [],
+      "viewstate": false,
+      "indicators": [
+        "Text prefix a:<count>:{"
+      ],
+      "details": "Text array produced by serialize(). An array alone carries no class names, but the same unserialize() sink normally accepts nested objects, so the endpoint may be exploitable with object payloads.",
+      "frameworks": [
+        "unserialize()",
+        "Cookie and form-field state handling"
+      ],
+      "risk": "Confirms that the application round-trips serialized PHP data through the client and passes it to unserialize().",
+      "remediation": "Replace serialize and unserialize with JSON for client-visible state, and sign any state that must be stored client-side."
+    },
+    {
+      "id": "node_serialize",
+      "language": "JavaScript",
+      "runtime": "Node.js",
+      "confidence": "high",
+      "format": "node-serialize function payload",
+      "kinds": [
+        "node-serialize function payload"
+      ],
+      "content_types": [],
+      "type_keys": [],
+      "viewstate": false,
+      "indicators": [
+        "Marker _$$ND_FUNC$$_ inside a JSON string value"
+      ],
+      "details": "The node-serialize package encodes functions as strings behind this marker and rebuilds them by evaluating the string when unserialize() runs, so function bodies sent by a client can execute on the server.",
+      "frameworks": [
+        "node-serialize"
+      ],
+      "risk": "Untrusted input passed to unserialize() can lead to remote code execution inside the Node.js process.",
+      "remediation": "Remove node-serialize, exchange plain JSON data only, and never revive functions from client-supplied input."
+    },
+    {
+      "id": "json_dotnet_type",
+      "language": ".NET",
+      "runtime": "Json.NET / Newtonsoft.Json",
+      "confidence": "high",
+      "format": "Polymorphic JSON with $type metadata",
+      "kinds": [],
+      "content_types": [],
+      "type_keys": [
+        "$type"
+      ],
+      "viewstate": false,
+      "indicators": [
+        "JSON property \"$type\" holding a .NET type name"
+      ],
+      "details": "Json.NET writes $type with an assembly-qualified type name when TypeNameHandling is enabled. If the server honors client-supplied type names, the sender chooses which type is instantiated.",
+      "frameworks": [
+        "Newtonsoft.Json TypeNameHandling",
+        "APIs built on Json.NET"
+      ],
+      "risk": "Unsafe TypeNameHandling lets attackers instantiate arbitrary types, which can lead to remote code execution through gadget types.",
+      "remediation": "Use TypeNameHandling.None, or restrict allowed types with a custom ISerializationBinder allow-list."
+    },
+    {
+      "id": "json_dotnet_dunder_type",
+      "language": ".NET",
+      "runtime": "ASP.NET JavaScriptSerializer / DataContractJsonSerializer",
+      "confidence": "high",
+      "format": "Polymorphic JSON with __type metadata",
+      "kinds": [],
+      "content_types": [],
+      "type_keys": [
+        "__type"
+      ],
+      "viewstate": false,
+      "indicators": [
+        "JSON property \"__type\" holding a .NET type name"
+      ],
+      "details": "JavaScriptSerializer with a type resolver and DataContractJsonSerializer emit __type to describe the concrete type. Servers that resolve this value on input let the sender influence the instantiated type.",
+      "frameworks": [
+        "JavaScriptSerializer with SimpleTypeResolver",
+        "DataContractJsonSerializer",
+        "ASP.NET AJAX and ASMX services"
+      ],
+      "risk": "Unrestricted type resolution can allow instantiation of unintended types during deserialization.",
+      "remediation": "Do not use SimpleTypeResolver on untrusted input, and limit deserialization to an explicit list of known types."
+    },
+    {
+      "id": "json_at_type",
+      "language": "Java",
+      "runtime": "Fastjson / Jackson",
+      "confidence": "medium",
+      "format": "Polymorphic JSON with @type metadata",
+      "kinds": [],
+      "content_types": [],
+      "type_keys": [
+        "@type"
+      ],
+      "viewstate": false,
+      "indicators": [
+        "JSON property \"@type\" holding a dotted class name"
+      ],
+      "details": "Fastjson autoType and Jackson type information use @type to name the class to instantiate. A dotted package-style class name strongly suggests a JVM backend.",
+      "frameworks": [
+        "Fastjson autoType",
+        "Jackson JsonTypeInfo with Id.NAME",
+        "Jackson default typing"
+      ],
+      "risk": "If the library honors client-supplied class names, attackers can select which class is instantiated and reach gadget classes.",
+      "remediation": "Disable autoType and default typing, or enforce an allow-list of permitted classes or a PolymorphicTypeValidator."
+    },
+    {
+      "id": "json_at_class",
+      "language": "Java",
+      "runtime": "Jackson",
+      "confidence": "medium",
+      "format": "Polymorphic JSON with @class metadata",
+      "kinds": [],
+      "content_types": [],
+      "type_keys": [
+        "@class"
+      ],
+      "viewstate": false,
+      "indicators": [
+        "JSON property \"@class\" holding a dotted class name"
+      ],
+      "details": "Jackson uses @class as the default property for JsonTypeInfo with Id.CLASS and for default typing. The value is a fully qualified Java class name that the mapper loads and instantiates.",
+      "frameworks": [
+        "Jackson JsonTypeInfo with Id.CLASS",
+        "Jackson enableDefaultTyping",
+        "Spring Data Redis GenericJackson2JsonRedisSerializer"
+      ],
+      "risk": "Unrestricted polymorphic typing allows attacker-selected classes to be instantiated during deserialization.",
+      "remediation": "Avoid Id.CLASS and default typing for untrusted input, and configure a restrictive PolymorphicTypeValidator."
+    },
+    {
+      "id": "json_java_class",
+      "language": "Java",
+      "runtime": "jabsorb / JSON-RPC-Java",
+      "confidence": "high",
+      "format": "Polymorphic JSON with javaClass metadata",
+      "kinds": [],
+      "content_types": [],
+      "type_keys": [
+        "javaClass"
+      ],
+      "viewstate": false,
+      "indicators": [
+        "JSON property \"javaClass\" holding a dotted class name"
+      ],
+      "details": "The javaClass hint is used by jabsorb and similar JSON-RPC bridges to carry the fully qualified Java class of a value, which the server resolves while unmarshalling.",
+      "frameworks": [
+        "jabsorb",
+        "JSON-RPC-Java",
+        "Legacy Java JSON-RPC bridges"
+      ],
+      "risk": "Client-controlled class names can lead to instantiation of unintended classes during unmarshalling.",
+      "remediation": "Retire the legacy bridge or restrict unmarshalling to an explicit set of expected classes."
+    },
+    {
+      "id": "json_underscore_class",
+      "language": "Java",
+      "runtime": "Spring Data",
+      "confidence": "medium",
+      "format": "Document with _class type hint",
+      "kinds": [],
+      "content_types": [],
+      "type_keys": [
+        "_class"
+      ],
+      "viewstate": false,
+      "indicators": [
+        "JSON property \"_class\" holding a dotted class name"
+      ],
+      "details": "Spring Data stores the persisted Java type name in _class so documents can be mapped back to the right class. Data that round-trips through the client may let the sender influence the mapped type.",
+      "frameworks": [
+        "Spring Data MongoDB",
+        "Spring Data Couchbase"
+      ],
+      "risk": "Exposes backend class names and may allow type confusion if the hint is honored on input.",
+      "remediation": "Do not accept raw persisted documents from clients, and map input onto fixed DTO classes."
+    },
+    {
+      "id": "json_generic_class",
+      "language": "Undetermined",
+      "runtime": "Unknown",
+      "confidence": "low",
+      "format": "Generic class-name hint in JSON",
+      "kinds": [],
+      "content_types": [],
+      "type_keys": [
+        "$class",
+        "class"
+      ],
+      "viewstate": false,
+      "indicators": [
+        "JSON property \"$class\" or \"class\" holding a dotted type name"
+      ],
+      "details": "A generic type hint key that several ecosystems use. The backend language cannot be inferred from the key alone; dotted lowercase package names usually indicate Java, while names followed by an assembly name indicate .NET.",
+      "frameworks": [
+        "Groovy and Java JSON binders",
+        "Custom polymorphic serializers"
+      ],
+      "risk": "If the server resolves the supplied name, the sender may control which type is instantiated.",
+      "remediation": "Do not resolve client-supplied type names; bind input to fixed types."
+    }
+  ]
+}

@@ -1,0 +1,2782 @@
+{
+  "technologies": [
+    {
+      "name": "PHP",
+      "category": "Programming Language"
+    },
+    {
+      "name": "Python",
+      "category": "Programming Language"
+    },
+    {
+      "name": "Node.js",
+      "category": "Programming Language"
+    },
+    {
+      "name": "Ruby",
+      "category": "Programming Language"
+    },
+    {
+      "name": ".NET",
+      "category": "Programming Language"
+    },
+    {
+      "name": "PHP Session",
+      "category": "Programming Language",
+      "cookies": {
+        "^PHPSESSID$": ""
+      },
+      "implies": [
+        "PHP"
+      ]
+    },
+    {
+      "name": "Java",
+      "category": "Programming Language",
+      "cookies": {
+        "^JSESSIONID$": ""
+      }
+    },
+    {
+      "name": "ASP.NET",
+      "category": "Web Framework",
+      "cookies": {
+        "^ASP\\.NET_SessionId$": "",
+        "^\\.ASPXAUTH$": "",
+        "^\\.ASPXANONYMOUS$": "",
+        "^\\.ASPXFORMSAUTH$": ""
+      },
+      "implies": [
+        ".NET"
+      ]
+    },
+    {
+      "name": "ASP.NET Core",
+      "category": "Web Framework",
+      "cookies": {
+        "^\\.AspNetCore\\.Session$": "",
+        "^\\.AspNetCore\\.Identity\\.Application$": "",
+        "^\\.AspNetCore\\.Antiforgery\\.": "",
+        "^\\.AspNetCore\\.Cookies$": ""
+      },
+      "implies": [
+        ".NET"
+      ]
+    },
+    {
+      "name": "Express",
+      "category": "Web Framework",
+      "cookies": {
+        "^connect\\.sid$": ""
+      },
+      "implies": [
+        "Node.js"
+      ]
+    },
+    {
+      "name": "Django",
+      "category": "Web Framework",
+      "cookies": {
+        "^csrftoken$": "",
+        "^sessionid$": ""
+      },
+      "implies": [
+        "Python"
+      ]
+    },
+    {
+      "name": "Flask",
+      "category": "Web Framework",
+      "cookies": {
+        "^session$": "^\\.?[A-Za-z0-9_\\-]+\\.[A-Za-z0-9_\\-]{5,8}\\.[A-Za-z0-9_\\-]{27}$"
+      },
+      "implies": [
+        "Python"
+      ]
+    },
+    {
+      "name": "Laravel",
+      "category": "Web Framework",
+      "cookies": {
+        "^laravel_session$": "",
+        "^XSRF-TOKEN$": "^eyJpdiI6",
+        "^[\\w.\\-]+_session$": "^eyJpdiI6"
+      },
+      "implies": [
+        "PHP"
+      ]
+    },
+    {
+      "name": "Ruby on Rails",
+      "category": "Web Framework",
+      "cookies": {
+        "^_[\\w]+_session$": "",
+        "^remember_token$": ""
+      },
+      "implies": [
+        "Ruby"
+      ]
+    },
+    {
+      "name": "CodeIgniter",
+      "category": "Web Framework",
+      "cookies": {
+        "^ci_session$": ""
+      },
+      "implies": [
+        "PHP"
+      ]
+    },
+    {
+      "name": "CakePHP",
+      "category": "Web Framework",
+      "cookies": {
+        "^CAKEPHP$": ""
+      },
+      "implies": [
+        "PHP"
+      ]
+    },
+    {
+      "name": "Yii Framework",
+      "category": "Web Framework",
+      "cookies": {
+        "^YII_CSRF_TOKEN$": "",
+        "^YII_SESSION$": ""
+      },
+      "implies": [
+        "PHP"
+      ]
+    },
+    {
+      "name": "Spring Session",
+      "category": "Web Framework",
+      "cookies": {
+        "^SESSION$": "^[A-Za-z0-9_\\-]{20,}={0,2}$"
+      },
+      "implies": [
+        "Java"
+      ]
+    },
+    {
+      "name": "WordPress",
+      "category": "CMS",
+      "cookies": {
+        "^wordpress_": "",
+        "^wp-settings-": "",
+        "^wordpress_logged_in_": "",
+        "^wordpress_sec_": "",
+        "^wordpress_test_cookie$": ""
+      },
+      "implies": [
+        "PHP"
+      ]
+    },
+    {
+      "name": "WooCommerce",
+      "category": "E-commerce",
+      "cookies": {
+        "^woocommerce_cart_hash$": "",
+        "^woocommerce_items_in_cart$": "",
+        "^wp_woocommerce_session_": ""
+      },
+      "implies": [
+        "WordPress"
+      ]
+    },
+    {
+      "name": "Drupal",
+      "category": "CMS",
+      "cookies": {
+        "^S?SESS[0-9a-f]{32}$": "",
+        "^Drupal\\.visitor\\.": ""
+      },
+      "implies": [
+        "PHP"
+      ]
+    },
+    {
+      "name": "Joomla",
+      "category": "CMS",
+      "cookies": {
+        "^joomla_user_state$": "",
+        "^joomla_remember_me__": ""
+      },
+      "implies": [
+        "PHP"
+      ]
+    },
+    {
+      "name": "Magento",
+      "category": "E-commerce",
+      "cookies": {
+        "^frontend$": "",
+        "^mage-cache-sessid$": "",
+        "^mage-cache-storage$": "",
+        "^mage-messages$": ""
+      },
+      "implies": [
+        "PHP"
+      ]
+    },
+    {
+      "name": "PrestaShop",
+      "category": "E-commerce",
+      "cookies": {
+        "^PrestaShop-": ""
+      },
+      "implies": [
+        "PHP"
+      ]
+    },
+    {
+      "name": "OpenCart",
+      "category": "E-commerce",
+      "cookies": {
+        "^OCSESSID$": ""
+      },
+      "implies": [
+        "PHP"
+      ]
+    },
+    {
+      "name": "Ghost",
+      "category": "CMS",
+      "cookies": {
+        "^ghost-admin-api-session$": "",
+        "^ghost-members-ssr$": ""
+      }
+    },
+    {
+      "name": "Craft CMS",
+      "category": "CMS",
+      "cookies": {
+        "^CraftSessionId$": "",
+        "^CRAFT_CSRF_TOKEN$": ""
+      },
+      "implies": [
+        "PHP"
+      ]
+    },
+    {
+      "name": "TYPO3",
+      "category": "CMS",
+      "cookies": {
+        "^fe_typo_user$": "",
+        "^be_typo_user$": ""
+      },
+      "implies": [
+        "PHP"
+      ]
+    },
+    {
+      "name": "Umbraco",
+      "category": "CMS",
+      "cookies": {
+        "^UMB_UCONTEXT$": "",
+        "^UMB-XSRF-TOKEN$": ""
+      },
+      "implies": [
+        "ASP.NET"
+      ]
+    },
+    {
+      "name": "Sitecore",
+      "category": "CMS",
+      "cookies": {
+        "^SC_ANALYTICS_GLOBAL_COOKIE$": ""
+      },
+      "implies": [
+        "ASP.NET"
+      ]
+    },
+    {
+      "name": "Concrete CMS",
+      "category": "CMS",
+      "cookies": {
+        "^CONCRETE5$": ""
+      },
+      "implies": [
+        "PHP"
+      ]
+    },
+    {
+      "name": "Contao",
+      "category": "CMS",
+      "cookies": {
+        "^contao_": ""
+      },
+      "implies": [
+        "PHP"
+      ]
+    },
+    {
+      "name": "Shopify",
+      "category": "E-commerce",
+      "cookies": {
+        "^_shopify_y$": "",
+        "^_shopify_s$": "",
+        "^secure_customer_sig$": "",
+        "^_shopify_fs$": ""
+      }
+    },
+    {
+      "name": "BigCommerce",
+      "category": "E-commerce",
+      "cookies": {
+        "^SHOP_SESSION_TOKEN$": "",
+        "^fornax_anonymousId$": ""
+      }
+    },
+    {
+      "name": "Squarespace",
+      "category": "Website Builder",
+      "cookies": {
+        "^SS_MID$": "",
+        "^crumb$": "",
+        "^ss_cvt$": "",
+        "^ss_cpvisit$": ""
+      }
+    },
+    {
+      "name": "Wix",
+      "category": "Website Builder",
+      "cookies": {
+        "^wixSession$": "",
+        "^svSession$": "",
+        "^wixLanguage$": ""
+      }
+    },
+    {
+      "name": "Webflow",
+      "category": "Website Builder",
+      "cookies": {
+        "^__wf_cid$": "",
+        "^wf_sess$": ""
+      }
+    },
+    {
+      "name": "Shopware",
+      "category": "E-commerce",
+      "cookies": {
+        "^session-$": "",
+        "^sw-cache-hash$": ""
+      },
+      "implies": [
+        "PHP"
+      ]
+    },
+    {
+      "name": "nopCommerce",
+      "category": "E-commerce",
+      "cookies": {
+        "^\\.Nop\\.Customer$": "",
+        "^\\.Nop\\.Antiforgery$": ""
+      },
+      "implies": [
+        "ASP.NET"
+      ]
+    },
+    {
+      "name": "Odoo",
+      "category": "ERP/CRM",
+      "cookies": {
+        "^session_id$": ""
+      }
+    },
+    {
+      "name": "phpBB",
+      "category": "Forum",
+      "cookies": {
+        "^phpbb3_": ""
+      },
+      "implies": [
+        "PHP"
+      ]
+    },
+    {
+      "name": "vBulletin",
+      "category": "Forum",
+      "cookies": {
+        "^bb_sessionhash$": "",
+        "^bb_userid$": ""
+      },
+      "implies": [
+        "PHP"
+      ]
+    },
+    {
+      "name": "Discourse",
+      "category": "Forum",
+      "cookies": {
+        "^_forum_session$": "",
+        "^_t$": ""
+      },
+      "implies": [
+        "Ruby on Rails"
+      ]
+    },
+    {
+      "name": "Vanilla Forums",
+      "category": "Forum",
+      "cookies": {
+        "^Vanilla$": "",
+        "^VanillaSSO$": ""
+      }
+    },
+    {
+      "name": "Moodle",
+      "category": "LMS",
+      "cookies": {
+        "^MoodleSession": ""
+      },
+      "implies": [
+        "PHP"
+      ]
+    },
+    {
+      "name": "Atlassian (Jira/Confluence)",
+      "category": "DevOps",
+      "cookies": {
+        "^atlassian\\.xsrf\\.token$": "",
+        "^studio\\.crowd\\.tokenkey$": ""
+      },
+      "implies": [
+        "Java"
+      ]
+    },
+    {
+      "name": "Jenkins",
+      "category": "CI/CD",
+      "cookies": {
+        "^JSESSIONID\\.": ""
+      },
+      "implies": [
+        "Java"
+      ]
+    },
+    {
+      "name": "GitLab",
+      "category": "DevOps",
+      "cookies": {
+        "^_gitlab_session$": "",
+        "^remember_user_token$": ""
+      },
+      "implies": [
+        "Ruby on Rails"
+      ]
+    },
+    {
+      "name": "Grafana",
+      "category": "Monitoring",
+      "cookies": {
+        "^grafana_session$": "",
+        "^grafana_sess$": ""
+      }
+    },
+    {
+      "name": "Elastic Stack",
+      "category": "Monitoring",
+      "cookies": {
+        "^security_authentication$": ""
+      }
+    },
+    {
+      "name": "SAP Commerce Cloud (Hybris)",
+      "category": "E-commerce",
+      "cookies": {
+        "^anonymous-consents$": ""
+      },
+      "implies": [
+        "Java"
+      ]
+    },
+    {
+      "name": "phpMyAdmin",
+      "category": "Database Admin",
+      "cookies": {
+        "^phpMyAdmin$": ""
+      },
+      "implies": [
+        "PHP"
+      ]
+    },
+    {
+      "name": "Auth0",
+      "category": "Identity Provider",
+      "cookies": {
+        "^auth0$": "",
+        "^a0:session$": ""
+      }
+    },
+    {
+      "name": "Keycloak",
+      "category": "Identity Provider",
+      "cookies": {
+        "^KEYCLOAK_SESSION": "",
+        "^KEYCLOAK_IDENTITY": "",
+        "^AUTH_SESSION_ID": ""
+      }
+    },
+    {
+      "name": "Okta",
+      "category": "Identity Provider",
+      "cookies": {
+        "^okta-oauth-": ""
+      }
+    },
+    {
+      "name": "Cloudflare",
+      "category": "CDN",
+      "cookies": {
+        "^__cf_bm$": "",
+        "^__cfduid$": "",
+        "^cf_clearance$": "",
+        "^__cflb$": ""
+      }
+    },
+    {
+      "name": "Akamai Bot Manager",
+      "category": "Bot Management",
+      "cookies": {
+        "^ak_bmsc$": "",
+        "^bm_sz$": "",
+        "^_abck$": ""
+      }
+    },
+    {
+      "name": "Imperva",
+      "category": "WAF",
+      "cookies": {
+        "^incap_ses_": "",
+        "^visid_incap_": "",
+        "^nlbi_": ""
+      }
+    },
+    {
+      "name": "Sucuri",
+      "category": "WAF",
+      "cookies": {
+        "^sucuri_cloudproxy_uuid_": ""
+      }
+    },
+    {
+      "name": "AWS Elastic Load Balancer",
+      "category": "Load Balancer",
+      "cookies": {
+        "^AWSALB$": "",
+        "^AWSALBCORS$": "",
+        "^AWSALBTG$": ""
+      }
+    },
+    {
+      "name": "Distil Networks",
+      "category": "Bot Management",
+      "cookies": {
+        "^D_SID$": "",
+        "^D_UID$": ""
+      }
+    },
+    {
+      "name": "PerimeterX",
+      "category": "Bot Management",
+      "cookies": {
+        "^_px$": "",
+        "^_pxvid$": "",
+        "^_pxhd$": ""
+      }
+    },
+    {
+      "name": "DataDome",
+      "category": "Bot Management",
+      "cookies": {
+        "^datadome$": ""
+      }
+    },
+    {
+      "name": "Google Analytics",
+      "category": "Analytics",
+      "cookies": {
+        "^_ga$": "",
+        "^_gid$": "",
+        "^_gat(?:_[\\w]+)?$": "",
+        "^_ga_[A-Z0-9]+$": "",
+        "^AMP_TOKEN$": ""
+      }
+    },
+    {
+      "name": "Google Ads",
+      "category": "Advertising",
+      "cookies": {
+        "^_gcl_au$": "",
+        "^_gac_": ""
+      }
+    },
+    {
+      "name": "Facebook Pixel",
+      "category": "Advertising",
+      "cookies": {
+        "^_fbp$": "",
+        "^fr$": ""
+      }
+    },
+    {
+      "name": "Optimizely",
+      "category": "A/B Testing",
+      "cookies": {
+        "^optimizelyEndUserId$": "",
+        "^optimizelySegments$": "",
+        "^optimizelyBuckets$": ""
+      }
+    },
+    {
+      "name": "HubSpot",
+      "category": "Marketing",
+      "cookies": {
+        "^hubspotutk$": "",
+        "^__hstc$": "",
+        "^__hssc$": "",
+        "^__hssrc$": ""
+      }
+    },
+    {
+      "name": "Intercom",
+      "category": "Customer Support",
+      "cookies": {
+        "^intercom-session-": "",
+        "^intercom-device-id-": ""
+      }
+    },
+    {
+      "name": "Zendesk",
+      "category": "Customer Support",
+      "cookies": {
+        "^_zendesk_session$": "",
+        "^__zlcmid$": ""
+      }
+    },
+    {
+      "name": "Hotjar",
+      "category": "Analytics",
+      "cookies": {
+        "^_hjSessionUser_": "",
+        "^_hjSession_": "",
+        "^_hjid$": ""
+      }
+    },
+    {
+      "name": "Mixpanel",
+      "category": "Analytics",
+      "cookies": {
+        "^mp_[\\w]+_mixpanel$": ""
+      }
+    },
+    {
+      "name": "Segment",
+      "category": "Analytics",
+      "cookies": {
+        "^ajs_user_id$": "",
+        "^ajs_anonymous_id$": ""
+      }
+    },
+    {
+      "name": "Matomo",
+      "category": "Analytics",
+      "cookies": {
+        "^_pk_id\\.": "",
+        "^_pk_ses\\.": "",
+        "^MATOMO_SESSID$": ""
+      }
+    },
+    {
+      "name": "Tealium",
+      "category": "Tag Manager",
+      "cookies": {
+        "^utag_main$": ""
+      }
+    },
+    {
+      "name": "Adobe Experience Cloud",
+      "category": "Analytics",
+      "cookies": {
+        "^mbox$": "",
+        "^s_cc$": "",
+        "^s_sq$": "",
+        "^AMCV_": ""
+      }
+    },
+    {
+      "name": "Marketo",
+      "category": "Marketing",
+      "cookies": {
+        "^_mkto_trk$": ""
+      }
+    },
+    {
+      "name": "Pardot",
+      "category": "Marketing",
+      "cookies": {
+        "^pardot$": "",
+        "^visitor_id": ""
+      }
+    },
+    {
+      "name": "Klaviyo",
+      "category": "Marketing",
+      "cookies": {
+        "^__kla_id$": ""
+      }
+    },
+    {
+      "name": "Qualtrics",
+      "category": "Survey",
+      "cookies": {
+        "^QSI_SI_": ""
+      }
+    },
+    {
+      "name": "Play Framework",
+      "category": "Web Framework",
+      "cookies": {
+        "^PLAY_SESSION$": ""
+      },
+      "implies": [
+        "Java"
+      ]
+    },
+    {
+      "name": "Meteor.js",
+      "category": "Web Framework",
+      "cookies": {
+        "^meteor_login_token$": ""
+      },
+      "implies": [
+        "Node.js"
+      ]
+    },
+    {
+      "name": "Statamic",
+      "category": "CMS",
+      "cookies": {
+        "^statamic_session$": ""
+      },
+      "implies": [
+        "PHP"
+      ]
+    },
+    {
+      "name": "ExpressionEngine",
+      "category": "CMS",
+      "cookies": {
+        "^exp_": ""
+      },
+      "implies": [
+        "PHP"
+      ]
+    },
+    {
+      "name": "Microsoft ADFS / SharePoint Claims Auth",
+      "category": "Identity Provider",
+      "cookies": {
+        "^FedAuth$": "",
+        "^rtFa$": ""
+      },
+      "implies": [
+        ".NET"
+      ]
+    },
+    {
+      "name": "Azure AD B2C",
+      "category": "Identity Provider",
+      "cookies": {
+        "^x-ms-cpim-": ""
+      }
+    },
+    {
+      "name": "F5 BIG-IP",
+      "category": "Load Balancer",
+      "cookies": {
+        "^BIGipServer": ""
+      }
+    },
+    {
+      "name": "Citrix NetScaler ADC",
+      "category": "Load Balancer",
+      "cookies": {
+        "^NSC_": ""
+      }
+    },
+    {
+      "name": "Amazon CloudFront (Signed Cookies)",
+      "category": "CDN",
+      "cookies": {
+        "^CloudFront-Policy$": "",
+        "^CloudFront-Signature$": "",
+        "^CloudFront-Key-Pair-Id$": ""
+      }
+    },
+    {
+      "name": "Microsoft Clarity",
+      "category": "Analytics",
+      "cookies": {
+        "^_clck$": "",
+        "^_clsk$": ""
+      }
+    },
+    {
+      "name": "Yandex Metrica",
+      "category": "Analytics",
+      "cookies": {
+        "^_ym_uid$": "",
+        "^_ym_d$": ""
+      }
+    },
+    {
+      "name": "LinkedIn Insight Tag",
+      "category": "Advertising",
+      "cookies": {
+        "^li_sugr$": "",
+        "^UserMatchHistory$": "",
+        "^AnalyticsSyncHistory$": ""
+      }
+    },
+    {
+      "name": "TikTok Pixel",
+      "category": "Advertising",
+      "cookies": {
+        "^_ttp$": ""
+      }
+    },
+    {
+      "name": "LiveChat",
+      "category": "Customer Support",
+      "cookies": {
+        "^__lc_cid$": "",
+        "^__lc_cst$": ""
+      }
+    },
+    {
+      "name": "Crisp",
+      "category": "Customer Support",
+      "cookies": {
+        "^crisp-client": ""
+      }
+    },
+    {
+      "name": "FullStory",
+      "category": "Analytics",
+      "cookies": {
+        "^fs_uid$": ""
+      }
+    },
+    {
+      "name": "Mouseflow",
+      "category": "Analytics",
+      "cookies": {
+        "^mf_user$": ""
+      }
+    },
+    {
+      "name": "F5 BIG-IP ASM (Advanced WAF)",
+      "category": "WAF",
+      "cookies": {
+        "^TS[0-9a-f]{8}(?:[0-9a-f]{3})?(?:_\\d+)?$": "",
+        "^TS[0-9a-f]{8,}$": "",
+        "^f5avr\\d+_session_$": "",
+        "^f5_cspm$": "",
+        "^f5avraaaaaaaaaaaaaaaa_session_$": "",
+        "^MRHSession$": "",
+        "^LastMRH_Session$": "",
+        "^F5_ST$": "",
+        "^F5_HT_shrinked$": "",
+        "^F5_fullWT$": ""
+      }
+    },
+    {
+      "name": "F5 APM (Access Policy Manager)",
+      "category": "VPN",
+      "cookies": {
+        "^MRHSequence$": "",
+        "^MRHSHint$": ""
+      }
+    },
+    {
+      "name": "F5 Shape Security",
+      "category": "Bot Management",
+      "cookies": {
+        "^_imp_apg_r_$": ""
+      }
+    },
+    {
+      "name": "Barracuda WAF",
+      "category": "WAF",
+      "cookies": {
+        "^barra_counter_session$": "",
+        "^BNI__BARRACUDA_LB_COOKIE$": "",
+        "^BNI_persistence$": ""
+      }
+    },
+    {
+      "name": "Fortinet FortiWeb",
+      "category": "WAF",
+      "cookies": {
+        "^cookiesession1$": "",
+        "^FORTIWAFSID$": ""
+      }
+    },
+    {
+      "name": "Fortinet FortiGate SSL VPN",
+      "category": "VPN",
+      "cookies": {
+        "^SVPNCOOKIE$": "",
+        "^SVPNNETWORKCOOKIE$": "",
+        "^FGTServer$": ""
+      }
+    },
+    {
+      "name": "Citrix NetScaler Gateway",
+      "category": "VPN",
+      "cookies": {
+        "^NSC_AAAC$": "",
+        "^NSC_TMAA$": "",
+        "^NSC_TMAS$": "",
+        "^NSC_PERS$": "",
+        "^CtxsAuthId$": ""
+      }
+    },
+    {
+      "name": "Citrix StoreFront",
+      "category": "Virtualization",
+      "cookies": {
+        "^CtxsPluginAssistantState$": "",
+        "^CtxsUserPreferredClient$": "",
+        "^CtxsHasUserVisitedInstallPage$": ""
+      }
+    },
+    {
+      "name": "Pulse Secure / Ivanti Connect Secure",
+      "category": "VPN",
+      "cookies": {
+        "^DSID$": "",
+        "^DSFirstAccess$": "",
+        "^DSLastAccess$": "",
+        "^DSSignInURL$": "",
+        "^DSPREAUTH$": ""
+      }
+    },
+    {
+      "name": "Cisco ASA / AnyConnect WebVPN",
+      "category": "VPN",
+      "cookies": {
+        "^webvpn$": "",
+        "^webvpnlogin$": "",
+        "^webvpnc$": "",
+        "^webvpncontext$": "",
+        "^ASASessionID$": ""
+      }
+    },
+    {
+      "name": "Palo Alto GlobalProtect",
+      "category": "VPN",
+      "cookies": {
+        "^PHPSESSID_GP$": "",
+        "^SESSID_GP$": "",
+        "^PAN_": ""
+      }
+    },
+    {
+      "name": "SonicWall",
+      "category": "VPN",
+      "cookies": {
+        "^SNWL": "",
+        "^SonicWALL": ""
+      }
+    },
+    {
+      "name": "Radware AppWall",
+      "category": "WAF",
+      "cookies": {
+        "^rdwr_": ""
+      }
+    },
+    {
+      "name": "Radware Bot Manager (ShieldSquare)",
+      "category": "Bot Management",
+      "cookies": {
+        "^__uzma$": "",
+        "^__uzmb$": "",
+        "^__uzmc$": "",
+        "^__uzmd$": "",
+        "^__uzme$": ""
+      }
+    },
+    {
+      "name": "HAProxy",
+      "category": "Load Balancer",
+      "cookies": {
+        "^SERVERID$": "",
+        "^SERVERUSED$": ""
+      }
+    },
+    {
+      "name": "Kemp LoadMaster",
+      "category": "Load Balancer",
+      "cookies": {
+        "^KEMP_": ""
+      }
+    },
+    {
+      "name": "Azure Application Gateway",
+      "category": "Load Balancer",
+      "cookies": {
+        "^ApplicationGatewayAffinity$": "",
+        "^ApplicationGatewayAffinityCORS$": ""
+      }
+    },
+    {
+      "name": "Azure App Service (ARR Affinity)",
+      "category": "PaaS",
+      "cookies": {
+        "^ARRAffinity$": "",
+        "^ARRAffinitySameSite$": ""
+      }
+    },
+    {
+      "name": "Azure Front Door",
+      "category": "CDN",
+      "cookies": {
+        "^ASLBSA$": "",
+        "^ASLBSACORS$": ""
+      }
+    },
+    {
+      "name": "Google Cloud Load Balancer",
+      "category": "Load Balancer",
+      "cookies": {
+        "^GCLB$": ""
+      }
+    },
+    {
+      "name": "Fastly",
+      "category": "CDN",
+      "cookies": {
+        "^fastly-": ""
+      }
+    },
+    {
+      "name": "Akamai Edge",
+      "category": "CDN",
+      "cookies": {
+        "^akacd_": "",
+        "^akaalb_": "",
+        "^AKA_A2$": "",
+        "^aka-cc$": "",
+        "^aka-ct$": "",
+        "^aka-cr$": ""
+      }
+    },
+    {
+      "name": "Akamai Bot Manager Premier",
+      "category": "Bot Management",
+      "cookies": {
+        "^bm_sv$": "",
+        "^bm_mi$": "",
+        "^bm_lso$": ""
+      }
+    },
+    {
+      "name": "Reblaze",
+      "category": "WAF",
+      "cookies": {
+        "^rbzid$": "",
+        "^rbzsessionid$": ""
+      }
+    },
+    {
+      "name": "Cloudflare Challenge",
+      "category": "Bot Management",
+      "cookies": {
+        "^cf_chl_": "",
+        "^__cf_chl_": "",
+        "^cf_chl_rc_": ""
+      }
+    },
+    {
+      "name": "Cloudflare Access",
+      "category": "Zero Trust",
+      "cookies": {
+        "^CF_Authorization$": "",
+        "^CF_AppSession$": ""
+      }
+    },
+    {
+      "name": "Cloudflare (extended)",
+      "category": "CDN",
+      "cookies": {
+        "^__cfruid$": "",
+        "^_cfuvid$": ""
+      }
+    },
+    {
+      "name": "Imperva (extended)",
+      "category": "WAF",
+      "cookies": {
+        "^___utmvc$": "",
+        "^___utmvm$": "",
+        "^___utmvb$": "",
+        "^___utmva$": "",
+        "^reese84$": "",
+        "^incap_sh_": ""
+      }
+    },
+    {
+      "name": "Kasada",
+      "category": "Bot Management",
+      "cookies": {
+        "^x-kpsdk-": "",
+        "^KP_UIDz$": "",
+        "^KP_UIDz-ssn$": ""
+      }
+    },
+    {
+      "name": "Netacea",
+      "category": "Bot Management",
+      "cookies": {
+        "^_mitata$": "",
+        "^_mitataexp$": ""
+      }
+    },
+    {
+      "name": "Alibaba Cloud WAF",
+      "category": "WAF",
+      "cookies": {
+        "^acw_tc$": "",
+        "^acw_sc__v2$": "",
+        "^acw_sc__v3$": "",
+        "^aliyungf_tc$": ""
+      }
+    },
+    {
+      "name": "Huawei Cloud WAF",
+      "category": "WAF",
+      "cookies": {
+        "^HWWAFSESID$": "",
+        "^HWWAFSESTIME$": ""
+      }
+    },
+    {
+      "name": "Safedog",
+      "category": "WAF",
+      "cookies": {
+        "^safedog-flow-item": ""
+      }
+    },
+    {
+      "name": "Yunsuo",
+      "category": "WAF",
+      "cookies": {
+        "^yunsuo_session_verify$": "",
+        "^security_session_verify$": "",
+        "^security_session_mid_verify$": ""
+      }
+    },
+    {
+      "name": "360 Web Application Firewall",
+      "category": "WAF",
+      "cookies": {
+        "^__jsluid_[hs]$": ""
+      }
+    },
+    {
+      "name": "Knownsec Jiasule",
+      "category": "WAF",
+      "cookies": {
+        "^__jsl_clearance": ""
+      }
+    },
+    {
+      "name": "Queue-it",
+      "category": "Traffic Management",
+      "cookies": {
+        "^QueueITAccepted-": ""
+      }
+    },
+    {
+      "name": "Microsoft Entra ID / Azure AD",
+      "category": "Identity Provider",
+      "cookies": {
+        "^ESTSAUTH$": "",
+        "^ESTSAUTHPERSISTENT$": "",
+        "^ESTSAUTHLIGHT$": "",
+        "^esctx": "",
+        "^buid$": "",
+        "^stsservicecookie$": ""
+      }
+    },
+    {
+      "name": "ForgeRock AM / OpenAM",
+      "category": "Identity Provider",
+      "cookies": {
+        "^iPlanetDirectoryPro$": "",
+        "^amlbcookie$": ""
+      },
+      "implies": [
+        "Java"
+      ]
+    },
+    {
+      "name": "Shibboleth SP",
+      "category": "Identity Provider",
+      "cookies": {
+        "^_shibsession_": "",
+        "^_shibstate_": ""
+      }
+    },
+    {
+      "name": "Apereo CAS",
+      "category": "Identity Provider",
+      "cookies": {
+        "^CASTGC$": "",
+        "^CASPRIVACY$": ""
+      },
+      "implies": [
+        "Java"
+      ]
+    },
+    {
+      "name": "CA SiteMinder",
+      "category": "Identity Provider",
+      "cookies": {
+        "^SMSESSION$": "",
+        "^SMCHALLENGE$": "",
+        "^SMIDENTITY$": ""
+      }
+    },
+    {
+      "name": "Oracle Access Manager",
+      "category": "Identity Provider",
+      "cookies": {
+        "^ObSSOCookie$": "",
+        "^OAMAuthnCookie": "",
+        "^OAM_ID$": ""
+      },
+      "implies": [
+        "Java"
+      ]
+    },
+    {
+      "name": "OneLogin",
+      "category": "Identity Provider",
+      "cookies": {
+        "^sub_session_onelogin$": ""
+      }
+    },
+    {
+      "name": "ColdFusion",
+      "category": "Programming Language",
+      "cookies": {
+        "^CFID$": "",
+        "^CFTOKEN$": "",
+        "^CFGLOBALS$": ""
+      }
+    },
+    {
+      "name": "Classic ASP",
+      "category": "Programming Language",
+      "cookies": {
+        "^ASPSESSIONID[A-Z]{8}$": ""
+      }
+    },
+    {
+      "name": "Perl CGI::Session",
+      "category": "Programming Language",
+      "cookies": {
+        "^CGISESSID$": ""
+      }
+    },
+    {
+      "name": "Zend Framework / Laminas",
+      "category": "Web Framework",
+      "cookies": {
+        "^ZENDSESSID$": ""
+      },
+      "implies": [
+        "PHP"
+      ]
+    },
+    {
+      "name": "Symfony",
+      "category": "Web Framework",
+      "cookies": {
+        "^sf_redirect$": ""
+      },
+      "implies": [
+        "PHP"
+      ]
+    },
+    {
+      "name": "FuelPHP",
+      "category": "Web Framework",
+      "cookies": {
+        "^fuelcid$": "",
+        "^fuelfid$": ""
+      },
+      "implies": [
+        "PHP"
+      ]
+    },
+    {
+      "name": "Kohana",
+      "category": "Web Framework",
+      "cookies": {
+        "^kohanasession$": ""
+      },
+      "implies": [
+        "PHP"
+      ]
+    },
+    {
+      "name": "Next.js",
+      "category": "Web Framework",
+      "cookies": {
+        "^__next_preview_data$": "",
+        "^__prerender_bypass$": "",
+        "^next-auth\\.session-token$": "",
+        "^__Secure-next-auth\\.session-token$": "",
+        "^next-auth\\.csrf-token$": "",
+        "^__Host-next-auth\\.csrf-token$": ""
+      },
+      "implies": [
+        "Node.js"
+      ]
+    },
+    {
+      "name": "Koa",
+      "category": "Web Framework",
+      "cookies": {
+        "^koa\\.sess$": "",
+        "^koa\\.sess\\.sig$": ""
+      },
+      "implies": [
+        "Node.js"
+      ]
+    },
+    {
+      "name": "Sails.js",
+      "category": "Web Framework",
+      "cookies": {
+        "^sails\\.sid$": ""
+      },
+      "implies": [
+        "Node.js"
+      ]
+    },
+    {
+      "name": "Keystone",
+      "category": "CMS",
+      "cookies": {
+        "^keystone\\.sid$": "",
+        "^keystonejs-session$": ""
+      },
+      "implies": [
+        "Node.js"
+      ]
+    },
+    {
+      "name": "Pyramid",
+      "category": "Web Framework",
+      "cookies": {
+        "^auth_tkt$": ""
+      },
+      "implies": [
+        "Python"
+      ]
+    },
+    {
+      "name": "Tornado",
+      "category": "Web Framework",
+      "cookies": {
+        "^_xsrf$": ""
+      },
+      "implies": [
+        "Python"
+      ]
+    },
+    {
+      "name": "web2py",
+      "category": "Web Framework",
+      "cookies": {
+        "^session_id_[\\w]+$": ""
+      },
+      "implies": [
+        "Python"
+      ]
+    },
+    {
+      "name": "Zope / Plone",
+      "category": "CMS",
+      "cookies": {
+        "^__ac$": "",
+        "^_ZopeId$": ""
+      },
+      "implies": [
+        "Python"
+      ]
+    },
+    {
+      "name": "Rack",
+      "category": "Web Framework",
+      "cookies": {
+        "^rack\\.session$": "",
+        "^_rack_session$": ""
+      },
+      "implies": [
+        "Ruby"
+      ]
+    },
+    {
+      "name": "Hanami",
+      "category": "Web Framework",
+      "cookies": {
+        "^_hanami_session$": ""
+      },
+      "implies": [
+        "Ruby"
+      ]
+    },
+    {
+      "name": "Gorilla (Go)",
+      "category": "Web Framework",
+      "cookies": {
+        "^gosession_id$": ""
+      }
+    },
+    {
+      "name": "Beego",
+      "category": "Web Framework",
+      "cookies": {
+        "^beegosessionID$": ""
+      }
+    },
+    {
+      "name": "IBM WebSphere",
+      "category": "Application Server",
+      "cookies": {
+        "^LtpaToken2?$": "",
+        "^WASReqURL$": "",
+        "^WASPostParam$": ""
+      },
+      "implies": [
+        "Java"
+      ]
+    },
+    {
+      "name": "Oracle WebLogic",
+      "category": "Application Server",
+      "cookies": {
+        "^ADMINCONSOLESESSION$": ""
+      },
+      "implies": [
+        "Java"
+      ]
+    },
+    {
+      "name": "Oracle APEX",
+      "category": "Application Server",
+      "cookies": {
+        "^ORA_WWV_APP_\\d+$": "",
+        "^WWV_FLOW_": ""
+      }
+    },
+    {
+      "name": "Vaadin",
+      "category": "Web Framework",
+      "cookies": {
+        "^v-browserDetails$": ""
+      },
+      "implies": [
+        "Java"
+      ]
+    },
+    {
+      "name": "Magento 2 / Adobe Commerce",
+      "category": "E-commerce",
+      "cookies": {
+        "^private_content_version$": "",
+        "^section_data_ids$": "",
+        "^form_key$": "",
+        "^X-Magento-Vary$": "",
+        "^product_data_storage$": ""
+      },
+      "implies": [
+        "PHP"
+      ]
+    },
+    {
+      "name": "Salesforce Commerce Cloud (Demandware)",
+      "category": "E-commerce",
+      "cookies": {
+        "^dwsid$": "",
+        "^dwanonymous_": "",
+        "^__cq_uuid$": "",
+        "^__cq_seg$": ""
+      }
+    },
+    {
+      "name": "Liferay",
+      "category": "CMS",
+      "cookies": {
+        "^LFR_SESSION_STATE_\\d+$": "",
+        "^GUEST_LANGUAGE_ID$": "",
+        "^COOKIE_SUPPORT$": ""
+      },
+      "implies": [
+        "Java"
+      ]
+    },
+    {
+      "name": "Adobe Experience Manager (AEM)",
+      "category": "CMS",
+      "cookies": {
+        "^login-token$": "",
+        "^cq-authoring-mode$": ""
+      },
+      "implies": [
+        "Java"
+      ]
+    },
+    {
+      "name": "Alfresco",
+      "category": "CMS",
+      "cookies": {
+        "^alfLogin$": "",
+        "^alfUsername3$": "",
+        "^ALF_": ""
+      },
+      "implies": [
+        "Java"
+      ]
+    },
+    {
+      "name": "DNN (DotNetNuke)",
+      "category": "CMS",
+      "cookies": {
+        "^dnn_IsMobile$": "",
+        "^DNNPersonalization": "",
+        "^\\.DOTNETNUKE$": ""
+      },
+      "implies": [
+        "ASP.NET"
+      ]
+    },
+    {
+      "name": "Kentico",
+      "category": "CMS",
+      "cookies": {
+        "^CMSPreferredCulture$": "",
+        "^CMSCsrfCookie$": "",
+        "^CMSCookieLevel$": "",
+        "^CMSCurrentTheme$": ""
+      },
+      "implies": [
+        "ASP.NET"
+      ]
+    },
+    {
+      "name": "Episerver / Optimizely CMS",
+      "category": "CMS",
+      "cookies": {
+        "^EPiServer": "",
+        "^\\.EPiForm_": ""
+      },
+      "implies": [
+        "ASP.NET"
+      ]
+    },
+    {
+      "name": "Orchard CMS",
+      "category": "CMS",
+      "cookies": {
+        "^\\.Orchard\\.": ""
+      },
+      "implies": [
+        "ASP.NET"
+      ]
+    },
+    {
+      "name": "Bitrix",
+      "category": "CMS",
+      "cookies": {
+        "^BITRIX_SM_": "",
+        "^BX_USER_ID$": "",
+        "^BITRIX_CONVERSION": ""
+      },
+      "implies": [
+        "PHP"
+      ]
+    },
+    {
+      "name": "MODX",
+      "category": "CMS",
+      "cookies": {
+        "^LOGINLICENSE$": "",
+        "^modx": ""
+      },
+      "implies": [
+        "PHP"
+      ]
+    },
+    {
+      "name": "SilverStripe",
+      "category": "CMS",
+      "cookies": {
+        "^SilverStripe": ""
+      },
+      "implies": [
+        "PHP"
+      ]
+    },
+    {
+      "name": "October CMS",
+      "category": "CMS",
+      "cookies": {
+        "^october_session$": "",
+        "^admin_auth$": ""
+      },
+      "implies": [
+        "Laravel"
+      ]
+    },
+    {
+      "name": "Strapi",
+      "category": "CMS",
+      "cookies": {
+        "^strapi_": ""
+      },
+      "implies": [
+        "Node.js"
+      ]
+    },
+    {
+      "name": "Tilda",
+      "category": "Website Builder",
+      "cookies": {
+        "^tildauid$": "",
+        "^tildasid$": ""
+      }
+    },
+    {
+      "name": "Jimdo",
+      "category": "Website Builder",
+      "cookies": {
+        "^JimdoSession": ""
+      }
+    },
+    {
+      "name": "Salesforce",
+      "category": "CRM",
+      "cookies": {
+        "^BrowserId$": "",
+        "^sfdc-stream$": "",
+        "^renderCtx$": "",
+        "^oinfo$": "",
+        "^sid_Client$": "",
+        "^com\\.salesforce": ""
+      }
+    },
+    {
+      "name": "Salesforce Experience Cloud",
+      "category": "CRM",
+      "cookies": {
+        "^pctrk$": "",
+        "^_sfid_": "",
+        "^force-stream$": "",
+        "^force-proxy-stream$": ""
+      }
+    },
+    {
+      "name": "Microsoft Dynamics 365",
+      "category": "CRM",
+      "cookies": {
+        "^ReqClientId$": "",
+        "^CrmOwinAuth": ""
+      }
+    },
+    {
+      "name": "SAP NetWeaver / Fiori",
+      "category": "ERP/CRM",
+      "cookies": {
+        "^sap-usercontext$": "",
+        "^SAP_SESSIONID_": "",
+        "^MYSAPSSO2$": "",
+        "^sap-contextid$": "",
+        "^saplb_": ""
+      }
+    },
+    {
+      "name": "Oracle E-Business Suite",
+      "category": "ERP/CRM",
+      "cookies": {
+        "^ORA_FND_SESSION$": "",
+        "^ORA_UCM_": ""
+      },
+      "implies": [
+        "Java"
+      ]
+    },
+    {
+      "name": "Oracle PeopleSoft",
+      "category": "ERP/CRM",
+      "cookies": {
+        "^PS_TOKEN$": "",
+        "^PS_LOGINLIST$": "",
+        "^PS_TOKENEXPIRE$": "",
+        "^PS_DEVICEFEATURES$": "",
+        "^PS_TokenSite$": ""
+      }
+    },
+    {
+      "name": "NetSuite",
+      "category": "ERP/CRM",
+      "cookies": {
+        "^NS_VER$": "",
+        "^NLVisitorId$": "",
+        "^NS_ROUTING_VERSION$": ""
+      }
+    },
+    {
+      "name": "ServiceNow",
+      "category": "ITSM",
+      "cookies": {
+        "^glide_user$": "",
+        "^glide_user_route$": "",
+        "^glide_session_store$": "",
+        "^glide_user_activity$": ""
+      },
+      "implies": [
+        "Java"
+      ]
+    },
+    {
+      "name": "Freshdesk",
+      "category": "Customer Support",
+      "cookies": {
+        "^_helpkit_session$": "",
+        "^helpdesk_node_session$": ""
+      }
+    },
+    {
+      "name": "Zoho",
+      "category": "CRM",
+      "cookies": {
+        "^zabUserId$": "",
+        "^zps-tgr-dts$": "",
+        "^zalb_": "",
+        "^_zcsr_tmp$": "",
+        "^iamcsr$": "",
+        "^CT_CSRF_TOKEN$": ""
+      }
+    },
+    {
+      "name": "Zoho SalesIQ",
+      "category": "Customer Support",
+      "cookies": {
+        "^zld\\d+": "",
+        "^ZohoMarkRef$": "",
+        "^ZohoMarkSrc$": ""
+      }
+    },
+    {
+      "name": "cPanel / WHM",
+      "category": "Hosting Control Panel",
+      "cookies": {
+        "^cpsession$": "",
+        "^whostmgrsession$": "",
+        "^cprelogin$": "",
+        "^whostmgrrelogin$": "",
+        "^cp_security_token$": "",
+        "^whm_security_token$": ""
+      }
+    },
+    {
+      "name": "Plesk",
+      "category": "Hosting Control Panel",
+      "cookies": {
+        "^PLESKSESSID$": "",
+        "^plesk-securitytoken$": "",
+        "^plesk-": ""
+      }
+    },
+    {
+      "name": "DirectAdmin",
+      "category": "Hosting Control Panel",
+      "cookies": {
+        "^DirectAdmin": ""
+      }
+    },
+    {
+      "name": "ISPConfig",
+      "category": "Hosting Control Panel",
+      "cookies": {
+        "^ISPCSESS$": ""
+      },
+      "implies": [
+        "PHP"
+      ]
+    },
+    {
+      "name": "Webmin / Usermin",
+      "category": "Server Admin",
+      "cookies": {
+        "^webmin_": "",
+        "^usermin_": ""
+      }
+    },
+    {
+      "name": "Proxmox VE",
+      "category": "Virtualization",
+      "cookies": {
+        "^PVEAuthCookie$": "",
+        "^PMGAuthCookie$": "",
+        "^PBSAuthCookie$": ""
+      }
+    },
+    {
+      "name": "VMware vSphere",
+      "category": "Virtualization",
+      "cookies": {
+        "^vmware_soap_session$": "",
+        "^vmware_client$": ""
+      }
+    },
+    {
+      "name": "Synology DSM",
+      "category": "NAS",
+      "cookies": {
+        "^stay_logged_in$": "",
+        "^SynoToken$": "",
+        "^synology": ""
+      }
+    },
+    {
+      "name": "QNAP QTS",
+      "category": "NAS",
+      "cookies": {
+        "^NAS_SID$": "",
+        "^NAS_USER$": "",
+        "^NAS_PW$": "",
+        "^QNAPSID$": ""
+      }
+    },
+    {
+      "name": "pfSense",
+      "category": "Firewall",
+      "cookies": {
+        "^pfSense": "",
+        "^__csrf_magic$": ""
+      },
+      "implies": [
+        "PHP"
+      ]
+    },
+    {
+      "name": "OPNsense",
+      "category": "Firewall",
+      "cookies": {
+        "^opnsense": ""
+      },
+      "implies": [
+        "PHP"
+      ]
+    },
+    {
+      "name": "Ubiquiti UniFi",
+      "category": "Network Management",
+      "cookies": {
+        "^unifises$": "",
+        "^UNIFISES$": "",
+        "^AIROS_SESSIONID$": ""
+      }
+    },
+    {
+      "name": "Hikvision",
+      "category": "IoT / Camera",
+      "cookies": {
+        "^WebSession_": "",
+        "^HIKSESSID$": ""
+      }
+    },
+    {
+      "name": "Dahua",
+      "category": "IoT / Camera",
+      "cookies": {
+        "^DhWebClientSessionID$": "",
+        "^DhWebCookie$": "",
+        "^DWebClientSessionID": ""
+      }
+    },
+    {
+      "name": "Home Assistant",
+      "category": "IoT",
+      "cookies": {
+        "^ha_session$": ""
+      }
+    },
+    {
+      "name": "Kubernetes Dashboard",
+      "category": "DevOps",
+      "cookies": {
+        "^jweToken$": "",
+        "^kubernetes-dashboard": ""
+      }
+    },
+    {
+      "name": "Portainer",
+      "category": "DevOps",
+      "cookies": {
+        "^portainer\\.": "",
+        "^portainer_": ""
+      }
+    },
+    {
+      "name": "SonarQube",
+      "category": "DevOps",
+      "cookies": {
+        "^JWT-SESSION$": "",
+        "^SONAR_": ""
+      },
+      "implies": [
+        "Java"
+      ]
+    },
+    {
+      "name": "Nexus Repository",
+      "category": "DevOps",
+      "cookies": {
+        "^NXSESSIONID$": "",
+        "^NX-ANTI-CSRF-TOKEN$": ""
+      },
+      "implies": [
+        "Java"
+      ]
+    },
+    {
+      "name": "JFrog Artifactory",
+      "category": "DevOps",
+      "cookies": {
+        "^ARTIFACTORYSESSIONID$": "",
+        "^ARTIFACTORY_": ""
+      },
+      "implies": [
+        "Java"
+      ]
+    },
+    {
+      "name": "TeamCity",
+      "category": "CI/CD",
+      "cookies": {
+        "^TCSESSIONID$": "",
+        "^TeamCityMeta": ""
+      },
+      "implies": [
+        "Java"
+      ]
+    },
+    {
+      "name": "Gitea / Gogs",
+      "category": "DevOps",
+      "cookies": {
+        "^i_like_gitea$": "",
+        "^i_like_gogs$": "",
+        "^gitea_awesome$": ""
+      }
+    },
+    {
+      "name": "GitHub",
+      "category": "DevOps",
+      "cookies": {
+        "^_gh_sess$": "",
+        "^user_session$": "",
+        "^__Host-user_session_same_site$": "",
+        "^dotcom_user$": "",
+        "^_octo$": ""
+      }
+    },
+    {
+      "name": "Mattermost",
+      "category": "Collaboration",
+      "cookies": {
+        "^MMAUTHTOKEN$": "",
+        "^MMUSERID$": "",
+        "^MMCSRF$": ""
+      }
+    },
+    {
+      "name": "Rocket.Chat",
+      "category": "Collaboration",
+      "cookies": {
+        "^rc_uid$": "",
+        "^rc_token$": ""
+      }
+    },
+    {
+      "name": "Nextcloud",
+      "category": "File Sharing",
+      "cookies": {
+        "^oc_sessionPassphrase$": "",
+        "^nc_sameSiteCookielax$": "",
+        "^nc_sameSiteCookiestrict$": ""
+      },
+      "implies": [
+        "PHP"
+      ]
+    },
+    {
+      "name": "Confluence",
+      "category": "Collaboration",
+      "cookies": {
+        "^confluence\\.browse\\.space\\.cookie$": "",
+        "^confluence\\.list\\.pages\\.cookie$": "",
+        "^seraph\\.confluence$": ""
+      },
+      "implies": [
+        "Java"
+      ]
+    },
+    {
+      "name": "Jira",
+      "category": "Project Management",
+      "cookies": {
+        "^seraph\\.rememberme\\.cookie$": "",
+        "^jira\\.": ""
+      },
+      "implies": [
+        "Java"
+      ]
+    },
+    {
+      "name": "Notion",
+      "category": "Collaboration",
+      "cookies": {
+        "^token_v2$": "",
+        "^notion_user_id$": "",
+        "^notion_browser_id$": "",
+        "^notion_locale$": ""
+      }
+    },
+    {
+      "name": "Zoom",
+      "category": "Collaboration",
+      "cookies": {
+        "^_zm_ssid$": "",
+        "^zm_aid$": "",
+        "^zm_haid$": "",
+        "^zm_cluster$": "",
+        "^_zm_csp_script_nonce$": ""
+      }
+    },
+    {
+      "name": "Outlook Web App / Exchange OWA",
+      "category": "Email",
+      "cookies": {
+        "^X-OWA-CANARY$": "",
+        "^X-BackEndCookie$": "",
+        "^X-BackEndCookie2$": "",
+        "^cadata$": "",
+        "^cadataTTL$": "",
+        "^cadataKey$": "",
+        "^cadataIV$": "",
+        "^cadataSig$": "",
+        "^OutlookSession$": ""
+      },
+      "implies": [
+        "ASP.NET"
+      ]
+    },
+    {
+      "name": "Roundcube",
+      "category": "Email",
+      "cookies": {
+        "^roundcube_sessid$": "",
+        "^roundcube_sessauth$": "",
+        "^roundcube_cookies$": ""
+      },
+      "implies": [
+        "PHP"
+      ]
+    },
+    {
+      "name": "Horde",
+      "category": "Email",
+      "cookies": {
+        "^Horde$": "",
+        "^horde_secret_key$": ""
+      },
+      "implies": [
+        "PHP"
+      ]
+    },
+    {
+      "name": "Zimbra",
+      "category": "Email",
+      "cookies": {
+        "^ZM_AUTH_TOKEN$": "",
+        "^ZM_TEST$": "",
+        "^ZM_LOGIN_CSRF$": "",
+        "^ZM_ADMIN_AUTH_TOKEN$": "",
+        "^ZX_AUTH_TOKEN$": ""
+      },
+      "implies": [
+        "Java"
+      ]
+    },
+    {
+      "name": "SquirrelMail",
+      "category": "Email",
+      "cookies": {
+        "^SQMSESSID$": "",
+        "^squirrelmail_language$": ""
+      },
+      "implies": [
+        "PHP"
+      ]
+    },
+    {
+      "name": "Dynatrace",
+      "category": "Monitoring",
+      "cookies": {
+        "^dtCookie$": "",
+        "^dtLatC$": "",
+        "^dtPC$": "",
+        "^dtSa$": "",
+        "^rxVisitor$": "",
+        "^rxvt$": ""
+      }
+    },
+    {
+      "name": "AppDynamics",
+      "category": "Monitoring",
+      "cookies": {
+        "^ADRUM_BT$": "",
+        "^ADRUM_BTa$": "",
+        "^ADRUM$": ""
+      }
+    },
+    {
+      "name": "New Relic Browser",
+      "category": "Monitoring",
+      "cookies": {
+        "^NREUM$": "",
+        "^NRBA_SESSION$": ""
+      }
+    },
+    {
+      "name": "Datadog RUM",
+      "category": "Monitoring",
+      "cookies": {
+        "^_dd_s$": ""
+      }
+    },
+    {
+      "name": "Splunk",
+      "category": "Monitoring",
+      "cookies": {
+        "^splunkweb_csrf_token": "",
+        "^splunkweb_uid$": "",
+        "^splunk_csrf_token": ""
+      }
+    },
+    {
+      "name": "Sentry",
+      "category": "Monitoring",
+      "cookies": {
+        "^sentry-sc$": "",
+        "^sentrysid$": ""
+      }
+    },
+    {
+      "name": "Pendo",
+      "category": "Analytics",
+      "cookies": {
+        "^_pendo_visitorId": "",
+        "^_pendo_accountId": "",
+        "^_pendo_meta": "",
+        "^_pendo_guides": ""
+      }
+    },
+    {
+      "name": "Amplitude",
+      "category": "Analytics",
+      "cookies": {
+        "^amp_[a-f0-9]{6}$": "",
+        "^AMP_[A-Z0-9]{6,}$": "",
+        "^amplitude_id": ""
+      }
+    },
+    {
+      "name": "Heap",
+      "category": "Analytics",
+      "cookies": {
+        "^_hp2_id\\.": "",
+        "^_hp2_ses_props\\.": "",
+        "^_hp2_props\\.": ""
+      }
+    },
+    {
+      "name": "Kissmetrics",
+      "category": "Analytics",
+      "cookies": {
+        "^km_ai$": "",
+        "^km_lv$": "",
+        "^km_ni$": "",
+        "^kvcd$": ""
+      }
+    },
+    {
+      "name": "Lucky Orange",
+      "category": "Analytics",
+      "cookies": {
+        "^_lo_uid$": "",
+        "^_lo_v$": "",
+        "^_lo_np_": ""
+      }
+    },
+    {
+      "name": "Crazy Egg",
+      "category": "Analytics",
+      "cookies": {
+        "^_ce\\.s$": "",
+        "^_ce\\.clock_data$": "",
+        "^_ce\\.gtld$": "",
+        "^_ce\\.cch$": ""
+      }
+    },
+    {
+      "name": "Smartlook",
+      "category": "Analytics",
+      "cookies": {
+        "^SL_C_": "",
+        "^SL_L_": "",
+        "^SL_G_WPT_TO$": ""
+      }
+    },
+    {
+      "name": "LogRocket",
+      "category": "Analytics",
+      "cookies": {
+        "^_lr_hb_": "",
+        "^_lr_tabs_": "",
+        "^_lr_uf_": "",
+        "^_lr_env_src_ats$": "",
+        "^_lr_sampling_rate$": ""
+      }
+    },
+    {
+      "name": "Drift",
+      "category": "Customer Support",
+      "cookies": {
+        "^driftt_aid$": "",
+        "^drift_aid$": "",
+        "^drift_campaign_refresh$": "",
+        "^driftt_sid$": ""
+      }
+    },
+    {
+      "name": "Tawk.to",
+      "category": "Customer Support",
+      "cookies": {
+        "^TawkConnectionTime$": "",
+        "^Tawk_": "",
+        "^tawkUUID$": ""
+      }
+    },
+    {
+      "name": "Olark",
+      "category": "Customer Support",
+      "cookies": {
+        "^olfsk$": "",
+        "^hblid$": "",
+        "^_okdetect$": "",
+        "^_okbk$": "",
+        "^_oklv$": ""
+      }
+    },
+    {
+      "name": "JivoChat",
+      "category": "Customer Support",
+      "cookies": {
+        "^jv_": "",
+        "^JIVOSITE": ""
+      }
+    },
+    {
+      "name": "Smartsupp",
+      "category": "Customer Support",
+      "cookies": {
+        "^ssupp\\.": ""
+      }
+    },
+    {
+      "name": "Gorgias",
+      "category": "Customer Support",
+      "cookies": {
+        "^gorgias": ""
+      }
+    },
+    {
+      "name": "Mailchimp",
+      "category": "Marketing",
+      "cookies": {
+        "^mailchimp_landing_site$": "",
+        "^_mcid$": "",
+        "^MCPopupClosed$": "",
+        "^MCPopupSubscribed$": ""
+      }
+    },
+    {
+      "name": "ActiveCampaign",
+      "category": "Marketing",
+      "cookies": {
+        "^prism_[0-9]+$": "",
+        "^ac_enable_tracking$": ""
+      }
+    },
+    {
+      "name": "Brevo (Sendinblue)",
+      "category": "Marketing",
+      "cookies": {
+        "^sib_cuid$": ""
+      }
+    },
+    {
+      "name": "Eloqua",
+      "category": "Marketing",
+      "cookies": {
+        "^ELOQUA$": "",
+        "^ELQSTATUS$": "",
+        "^_elqCookieTest$": ""
+      }
+    },
+    {
+      "name": "Iterable",
+      "category": "Marketing",
+      "cookies": {
+        "^iterableEmailCampaignId$": "",
+        "^iterableTemplateId$": "",
+        "^iterableMessageId$": "",
+        "^iterableEndUserId$": ""
+      }
+    },
+    {
+      "name": "Braze",
+      "category": "Marketing",
+      "cookies": {
+        "^ab\\.storage\\.": "",
+        "^appboy_": ""
+      }
+    },
+    {
+      "name": "OneSignal",
+      "category": "Marketing",
+      "cookies": {
+        "^onesignal-": ""
+      }
+    },
+    {
+      "name": "OptinMonster",
+      "category": "Marketing",
+      "cookies": {
+        "^omSeen": "",
+        "^_omappvp$": "",
+        "^_omappvs$": ""
+      }
+    },
+    {
+      "name": "Unbounce",
+      "category": "Marketing",
+      "cookies": {
+        "^ubvt$": "",
+        "^ubpv$": "",
+        "^ubvs$": ""
+      }
+    },
+    {
+      "name": "VWO",
+      "category": "A/B Testing",
+      "cookies": {
+        "^_vwo_uuid$": "",
+        "^_vwo_uuid_v2$": "",
+        "^_vwo_ds$": "",
+        "^_vwo_sn$": "",
+        "^_vis_opt_s$": "",
+        "^_vis_opt_test_cookie$": "",
+        "^_vis_opt_exp_": ""
+      }
+    },
+    {
+      "name": "Google Optimize",
+      "category": "A/B Testing",
+      "cookies": {
+        "^_gaexp$": "",
+        "^_opt_awcid$": "",
+        "^_opt_awmid$": "",
+        "^_opt_awgid$": "",
+        "^_opt_awkid$": "",
+        "^_opt_utmc$": ""
+      }
+    },
+    {
+      "name": "AB Tasty",
+      "category": "A/B Testing",
+      "cookies": {
+        "^ABTasty$": "",
+        "^ABTastySession$": "",
+        "^ABTastyData$": ""
+      }
+    },
+    {
+      "name": "Kameleoon",
+      "category": "A/B Testing",
+      "cookies": {
+        "^kameleoonVisitorCode$": ""
+      }
+    },
+    {
+      "name": "Google Tag Manager (server-side)",
+      "category": "Tag Manager",
+      "cookies": {
+        "^FPID$": "",
+        "^FPLC$": "",
+        "^_dc_gtm_": "",
+        "^_gtmeec$": "",
+        "^FPAU$": "",
+        "^FPGCLAW$": "",
+        "^FPGCLDC$": "",
+        "^FPGCLGB$": ""
+      }
+    },
+    {
+      "name": "Google DoubleClick",
+      "category": "Advertising",
+      "cookies": {
+        "^__gads$": "",
+        "^__gpi$": "",
+        "^_gads$": "",
+        "^IDE$": "",
+        "^ar_debug$": ""
+      }
+    },
+    {
+      "name": "Google Account",
+      "category": "Identity Provider",
+      "cookies": {
+        "^__Secure-1PSID$": "",
+        "^__Secure-3PSID$": "",
+        "^__Secure-1PAPISID$": "",
+        "^__Secure-3PAPISID$": "",
+        "^__Secure-1PSIDTS$": "",
+        "^__Secure-3PSIDTS$": "",
+        "^__Secure-1PSIDCC$": "",
+        "^__Secure-3PSIDCC$": "",
+        "^SAPISID$": "",
+        "^APISID$": "",
+        "^SIDCC$": ""
+      }
+    },
+    {
+      "name": "YouTube",
+      "category": "Video",
+      "cookies": {
+        "^VISITOR_INFO1_LIVE$": "",
+        "^YSC$": "",
+        "^VISITOR_PRIVACY_METADATA$": "",
+        "^yt-remote-": ""
+      }
+    },
+    {
+      "name": "Vimeo",
+      "category": "Video",
+      "cookies": {
+        "^vuid$": "",
+        "^continuous_play_v3$": ""
+      }
+    },
+    {
+      "name": "Wistia",
+      "category": "Video",
+      "cookies": {
+        "^__wistia": "",
+        "^wistia-": ""
+      }
+    },
+    {
+      "name": "X (Twitter) Ads",
+      "category": "Advertising",
+      "cookies": {
+        "^personalization_id$": "",
+        "^guest_id$": "",
+        "^guest_id_ads$": "",
+        "^guest_id_marketing$": "",
+        "^_twitter_sess$": "",
+        "^twid$": "",
+        "^ct0$": ""
+      }
+    },
+    {
+      "name": "Pinterest Tag",
+      "category": "Advertising",
+      "cookies": {
+        "^_pin_unauth$": "",
+        "^_pinterest_ct_ua$": "",
+        "^_pinterest_sess$": "",
+        "^_derived_epik$": "",
+        "^_epik$": ""
+      }
+    },
+    {
+      "name": "Snapchat Pixel",
+      "category": "Advertising",
+      "cookies": {
+        "^_scid$": "",
+        "^_scid_r$": "",
+        "^_sctr$": "",
+        "^_schn$": "",
+        "^sc_at$": ""
+      }
+    },
+    {
+      "name": "Reddit Pixel",
+      "category": "Advertising",
+      "cookies": {
+        "^_rdt_uuid$": "",
+        "^_rdt_cid$": "",
+        "^reddit_session$": "",
+        "^loid$": "",
+        "^edgebucket$": ""
+      }
+    },
+    {
+      "name": "Microsoft Advertising (UET)",
+      "category": "Advertising",
+      "cookies": {
+        "^_uetsid$": "",
+        "^_uetvid$": "",
+        "^_uetmsclkid$": "",
+        "^MUID$": "",
+        "^MUIDB$": ""
+      }
+    },
+    {
+      "name": "Criteo",
+      "category": "Advertising",
+      "cookies": {
+        "^cto_bundle$": "",
+        "^cto_bidid$": "",
+        "^cto_lwid$": "",
+        "^cto_axid$": ""
+      }
+    },
+    {
+      "name": "Taboola",
+      "category": "Advertising",
+      "cookies": {
+        "^t_gid$": "",
+        "^trc_cookie_storage$": "",
+        "^_tb_t_ppg$": "",
+        "^_tb_sess_r$": "",
+        "^taboola_": ""
+      }
+    },
+    {
+      "name": "Outbrain",
+      "category": "Advertising",
+      "cookies": {
+        "^obuid$": "",
+        "^outbrain_cid_fetch$": ""
+      }
+    },
+    {
+      "name": "Xandr (AppNexus)",
+      "category": "Advertising",
+      "cookies": {
+        "^uuid2$": "",
+        "^anj$": "",
+        "^XANDR_PANID$": ""
+      }
+    },
+    {
+      "name": "The Trade Desk",
+      "category": "Advertising",
+      "cookies": {
+        "^TDID$": "",
+        "^TDCPM$": "",
+        "^TTDOptOut$": ""
+      }
+    },
+    {
+      "name": "Yahoo",
+      "category": "Advertising",
+      "cookies": {
+        "^A1$": "",
+        "^A1S$": "",
+        "^A3$": "",
+        "^GUC$": "",
+        "^GUCS$": "",
+        "^EuConsent$": "",
+        "^ypcdb$": ""
+      }
+    },
+    {
+      "name": "Disqus",
+      "category": "Comment System",
+      "cookies": {
+        "^disqus_unique$": "",
+        "^disqusauth$": "",
+        "^__jid$": "",
+        "^__jidb$": ""
+      }
+    },
+    {
+      "name": "AddThis",
+      "category": "Social Sharing",
+      "cookies": {
+        "^__atuvc$": "",
+        "^__atuvs$": "",
+        "^__atssc$": ""
+      }
+    },
+    {
+      "name": "ShareThis",
+      "category": "Social Sharing",
+      "cookies": {
+        "^__sharethis_cookie_test__$": "",
+        "^__unam$": "",
+        "^_stid$": "",
+        "^_stidv$": ""
+      }
+    },
+    {
+      "name": "Stripe.js",
+      "category": "Payment",
+      "cookies": {
+        "^__stripe_mid$": "",
+        "^__stripe_sid$": ""
+      }
+    },
+    {
+      "name": "PayPal",
+      "category": "Payment",
+      "cookies": {
+        "^x-pp-s$": "",
+        "^l7_az$": "",
+        "^tsrce$": "",
+        "^X-PP-SILOVER$": "",
+        "^enforce_policy$": ""
+      }
+    },
+    {
+      "name": "Adyen",
+      "category": "Payment",
+      "cookies": {
+        "^_RP_UID$": ""
+      }
+    },
+    {
+      "name": "Cookiebot",
+      "category": "Consent Management",
+      "cookies": {
+        "^CookieConsent$": "",
+        "^CookieConsentBulkTicket$": "",
+        "^CookieConsentBulkSetting": ""
+      }
+    },
+    {
+      "name": "OneTrust",
+      "category": "Consent Management",
+      "cookies": {
+        "^OptanonConsent$": "",
+        "^OptanonAlertBoxClosed$": "",
+        "^OneTrustActiveGroups$": "",
+        "^OTGPPConsent$": ""
+      }
+    },
+    {
+      "name": "TrustArc",
+      "category": "Consent Management",
+      "cookies": {
+        "^notice_behavior$": "",
+        "^notice_preferences$": "",
+        "^notice_gdpr_prefs$": "",
+        "^notice_poptime$": "",
+        "^TAconsentID$": "",
+        "^cmapi_cookie_privacy$": ""
+      }
+    },
+    {
+      "name": "Usercentrics",
+      "category": "Consent Management",
+      "cookies": {
+        "^uc_user_interaction$": "",
+        "^uc_settings$": ""
+      }
+    },
+    {
+      "name": "Didomi",
+      "category": "Consent Management",
+      "cookies": {
+        "^didomi_token$": ""
+      }
+    },
+    {
+      "name": "Quantcast Choice",
+      "category": "Consent Management",
+      "cookies": {
+        "^addtl_consent$": "",
+        "^__qca$": ""
+      }
+    },
+    {
+      "name": "Osano",
+      "category": "Consent Management",
+      "cookies": {
+        "^osano_consentmanager$": "",
+        "^osano_consentmanager_uuid$": ""
+      }
+    },
+    {
+      "name": "Iubenda",
+      "category": "Consent Management",
+      "cookies": {
+        "^_iub_cs-": ""
+      }
+    },
+    {
+      "name": "Complianz",
+      "category": "Consent Management",
+      "cookies": {
+        "^cmplz_": ""
+      },
+      "implies": [
+        "WordPress"
+      ]
+    },
+    {
+      "name": "CookieYes",
+      "category": "Consent Management",
+      "cookies": {
+        "^cookieyes-consent$": "",
+        "^cky-consent$": ""
+      }
+    },
+    {
+      "name": "Borlabs Cookie",
+      "category": "Consent Management",
+      "cookies": {
+        "^borlabs-cookie$": ""
+      },
+      "implies": [
+        "WordPress"
+      ]
+    }
+  ]
+}
