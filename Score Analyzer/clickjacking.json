@@ -1,0 +1,217 @@
+{
+  "ruleset": "clickjacking_possibility_score",
+  "version": "1.0",
+  "score": {
+    "min": 0,
+    "max": 100
+  },
+  "riskBands": [
+    { "label": "Safe", "min": 0, "max": 19 },
+    { "label": "Low", "min": 20, "max": 39 },
+    { "label": "Medium", "min": 40, "max": 59 },
+    { "label": "High", "min": 60, "max": 79 },
+    { "label": "Critical", "min": 80, "max": 100, "alert": "CRITICAL CLICKJACKING ALERT" }
+  ],
+  "baseline": {
+    "applicableResponseTypes": ["text/html"],
+    "sensitiveEndpointIndicators": ["login", "account", "settings", "payment", "transfer", "admin", "delete", "confirm"],
+    "htmlResponseBaseScore": 20,
+    "sensitiveEndpointBaseScore": 35
+  },
+  "rules": [
+    {
+      "id": "xfo_deny",
+      "group": "x_frame_options",
+      "header": "X-Frame-Options",
+      "condition": "equals_deny",
+      "weight": -40
+    },
+    {
+      "id": "xfo_sameorigin",
+      "group": "x_frame_options",
+      "header": "X-Frame-Options",
+      "condition": "equals_sameorigin",
+      "weight": -30
+    },
+    {
+      "id": "xfo_allow_from",
+      "group": "x_frame_options",
+      "header": "X-Frame-Options",
+      "condition": "equals_allow_from",
+      "weight": 10
+    },
+    {
+      "id": "xfo_invalid_value",
+      "group": "x_frame_options",
+      "header": "X-Frame-Options",
+      "condition": "present_but_invalid_or_unrecognized_value",
+      "weight": 15
+    },
+    {
+      "id": "xfo_missing",
+      "group": "x_frame_options",
+      "header": "X-Frame-Options",
+      "condition": "absent",
+      "weight": 25
+    },
+    {
+      "id": "csp_frame_ancestors_none",
+      "group": "csp",
+      "header": "Content-Security-Policy",
+      "directive": "frame-ancestors",
+      "condition": "equals_none",
+      "weight": -40
+    },
+    {
+      "id": "csp_frame_ancestors_self",
+      "group": "csp",
+      "header": "Content-Security-Policy",
+      "directive": "frame-ancestors",
+      "condition": "equals_self",
+      "weight": -30
+    },
+    {
+      "id": "csp_frame_ancestors_specific_domains",
+      "group": "csp",
+      "header": "Content-Security-Policy",
+      "directive": "frame-ancestors",
+      "condition": "equals_specific_trusted_domain_list",
+      "weight": -20
+    },
+    {
+      "id": "csp_frame_ancestors_wildcard",
+      "group": "csp",
+      "header": "Content-Security-Policy",
+      "directive": "frame-ancestors",
+      "condition": "equals_wildcard_or_overly_permissive",
+      "weight": 35
+    },
+    {
+      "id": "csp_frame_ancestors_missing",
+      "group": "csp",
+      "header": "Content-Security-Policy",
+      "directive": "frame-ancestors",
+      "condition": "directive_absent_while_csp_present",
+      "weight": 20
+    },
+    {
+      "id": "csp_header_absent",
+      "group": "csp",
+      "header": "Content-Security-Policy",
+      "condition": "header_absent",
+      "weight": 25
+    },
+    {
+      "id": "secfetchdest_iframe_on_sensitive_endpoint",
+      "group": "secfetch",
+      "header": "Sec-Fetch-Dest",
+      "condition": "equals_iframe_or_frame_on_sensitive_endpoint",
+      "weight": 30
+    },
+    {
+      "id": "secfetchsite_cross_site_with_iframe_dest",
+      "group": "secfetch",
+      "headers": ["Sec-Fetch-Site", "Sec-Fetch-Dest"],
+      "condition": "site_equals_cross_site_and_dest_equals_iframe",
+      "weight": 35
+    },
+    {
+      "id": "secfetch_headers_absent",
+      "group": "secfetch",
+      "headers": ["Sec-Fetch-Site", "Sec-Fetch-Dest"],
+      "condition": "all_absent",
+      "weight": 10
+    },
+    {
+      "id": "framebusting_script_detected",
+      "group": "client_side_mitigation",
+      "indicator": "javascript_frame_busting_code",
+      "condition": "present_in_response_body",
+      "weight": -10
+    },
+    {
+      "id": "framebusting_script_absent",
+      "group": "client_side_mitigation",
+      "indicator": "javascript_frame_busting_code",
+      "condition": "absent_in_response_body",
+      "weight": 5
+    },
+    {
+      "id": "sensitive_action_form_in_frameable_page",
+      "group": "page_sensitivity",
+      "indicator": "state_changing_form_or_button",
+      "condition": "present_on_page_without_frame_protection",
+      "weight": 25
+    },
+    {
+      "id": "x_content_type_options_missing",
+      "group": "supporting_headers",
+      "header": "X-Content-Type-Options",
+      "condition": "absent",
+      "weight": 5
+    }
+  ],
+  "combinations": [
+    {
+      "id": "full_protection_override",
+      "description": "full_protection",
+      "conditions": [
+        "xfo_deny_or_sameorigin",
+        "csp_frame_ancestors_restrictive"
+      ],
+      "type": "override",
+      "overrideScoreRange": { "min": 0, "max": 5 }
+    },
+    {
+      "id": "full_exposure_bonus",
+      "description": "no_frame_protection_on_sensitive_endpoint",
+      "conditions": [
+        "xfo_missing",
+        "csp_header_absent",
+        "sensitive_action_form_in_frameable_page"
+      ],
+      "type": "bonus",
+      "bonusWeight": 25
+    },
+    {
+      "id": "contradictory_headers_suspicion",
+      "description": "xfo_and_csp_frame_ancestors_conflict",
+      "conditions": [
+        "xfo_deny_or_sameorigin",
+        "csp_frame_ancestors_wildcard"
+      ],
+      "type": "bonus",
+      "bonusWeight": 15
+    },
+    {
+      "id": "partial_protection_cap",
+      "description": "only_one_protection_layer_present",
+      "conditions": [
+        "xfo_deny_or_sameorigin_present",
+        "csp_frame_ancestors_missing_or_csp_absent"
+      ],
+      "type": "cap",
+      "capMaxScore": 20
+    },
+    {
+      "id": "client_side_only_mitigation_cap",
+      "description": "only_framebusting_script_no_headers",
+      "conditions": [
+        "xfo_missing",
+        "csp_header_absent",
+        "framebusting_script_detected"
+      ],
+      "type": "cap",
+      "capMaxScore": 45
+    }
+  ],
+  "calculationFlow": [
+    "determine if response is html and whether endpoint matches sensitive endpoint indicators",
+    "set score to baseline value accordingly",
+    "apply all matching rules from groups x_frame_options, csp, secfetch, client_side_mitigation, page_sensitivity, supporting_headers",
+    "evaluate combinations and apply override, bonus or cap as defined",
+    "clamp final score between score.min and score.max",
+    "map final score to riskBands",
+    "if score >= 80 trigger alert CRITICAL CLICKJACKING ALERT"
+  ]
+}
