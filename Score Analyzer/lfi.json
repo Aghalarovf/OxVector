@@ -1,0 +1,90 @@
+{
+  "ruleset": "lfi_path_traversal_possibility_score",
+  "version": "1.0",
+  "scannerType": "passive",
+  "scoringMode": "stacking",
+  "score": {
+    "min": 0,
+    "max": 100
+  },
+  "riskBands": [
+    { "label": "Safe", "min": 0, "max": 19 },
+    { "label": "Low", "min": 20, "max": 39 },
+    { "label": "Medium", "min": 40, "max": 59 },
+    { "label": "High", "min": 60, "max": 79 },
+    { "label": "Critical", "min": 80, "max": 100, "alert": "CRITICAL LFI/PATH TRAVERSAL ALERT" }
+  ],
+  "baseline": {
+    "baseScore": 0
+  },
+  "rules": [
+    {
+      "id": "full_structure_param_image_file",
+      "group": "pattern_pool",
+      "patternType": "full_structure_match",
+      "description": "path_with_query_param_assigned_image_filename",
+      "examples": ["/src?img=img.png", "/view?image=photo.jpg"],
+      "matchPattern": "\\?[a-zA-Z0-9_]+=[a-zA-Z0-9_\\-]+\\.(png|jpg|jpeg|gif|bmp|webp)",
+      "weight": 40
+    },
+    {
+      "id": "direct_static_file_path",
+      "group": "pattern_pool",
+      "patternType": "direct_path_match",
+      "description": "direct_static_file_reference_in_url_path",
+      "examples": ["/img.png", "/assets/photo.jpg"],
+      "matchPattern": "\\/[a-zA-Z0-9_\\-]+\\.(png|jpg|jpeg|gif|bmp|webp)",
+      "weight": 30
+    },
+    {
+      "id": "lfi_prone_parameter_name",
+      "group": "pattern_pool",
+      "patternType": "parameter_name_match",
+      "description": "parameter_names_commonly_used_for_file_inclusion",
+      "values": ["file", "path", "page", "template", "include", "doc", "document", "folder", "dir", "directory", "filename", "filepath", "load", "loadfile", "view", "show", "read", "content", "download", "attachment", "upload", "resource", "src", "source", "target", "dest", "destination", "image", "img", "pic", "picture", "photo", "lang", "language", "locale", "config", "conf", "cfg", "module", "plugin", "theme", "skin", "layout", "action", "do", "func", "function", "cat", "category", "type", "report", "export", "import", "data", "root", "home", "base", "asset", "assets", "static", "style", "inc", "require", "require_once", "include_once", "goto", "redirect", "next", "return", "ref", "reference", "url"],
+      "weight": 20
+    },
+    {
+      "id": "image_content_extension",
+      "group": "pattern_pool",
+      "patternType": "extension_match",
+      "description": "image_content_related_extensions",
+      "values": ["png", "jpg", "jpeg", "jfif", "pjpeg", "pjp", "gif", "bmp", "dib", "webp", "tiff", "tif", "ico", "heic", "heif", "avif", "raw", "cr2", "nef", "orf", "sr2", "psd", "ai", "eps", "img", "imeg", "jpg2", "jp2", "apng"],
+      "weight": 10
+    },
+    {
+      "id": "audio_content_extension",
+      "group": "pattern_pool",
+      "patternType": "extension_match",
+      "description": "audio_content_related_extensions",
+      "values": ["mp3", "wav", "ogg", "aac"],
+      "weight": 5
+    },
+    {
+      "id": "data_vector_extension",
+      "group": "pattern_pool",
+      "patternType": "extension_match",
+      "description": "data_vector_and_document_format_extensions",
+      "values": ["json", "svg", "xml", "yaml", "yml", "csv", "tsv", "docx", "doc", "xlsx", "xls", "xlsm", "pptx", "ppt", "pdf", "rtf", "odt", "ods", "odp", "txt", "log", "ini", "env", "properties", "toml", "sql", "bak", "backup", "zip", "rar", "7z", "tar", "gz", "db", "sqlite", "mdb"],
+      "weight": 5
+    },
+    {
+      "id": "static_web_structure_extension",
+      "group": "pattern_pool",
+      "patternType": "extension_match",
+      "description": "static_web_structure_extensions",
+      "values": ["css", "html", "js"],
+      "weight": 3
+    }
+  ],
+  "combinations": [],
+  "calculationFlow": [
+    "set score to baseline.baseScore",
+    "scan url, path and parameters against every rule in pattern_pool group",
+    "for every rule that matches, add its weight to score (stacking, no exclusivity)",
+    "multiple rules can match the same request simultaneously and all matching weights are summed",
+    "clamp final score between score.min and score.max",
+    "map final score to riskBands",
+    "if score >= 80 trigger alert CRITICAL LFI/PATH TRAVERSAL ALERT"
+  ]
+}
