@@ -1,0 +1,224 @@
+{
+  "ruleset": "csrf_possibility_score",
+  "version": "1.0",
+  "score": {
+    "min": 0,
+    "max": 100
+  },
+  "riskBands": [
+    { "label": "Safe", "min": 0, "max": 19 },
+    { "label": "Low", "min": 20, "max": 39 },
+    { "label": "Medium", "min": 40, "max": 59 },
+    { "label": "High", "min": 60, "max": 79 },
+    { "label": "Critical", "min": 80, "max": 100, "alert": "CRITICAL CSRF ALERT" }
+  ],
+  "baseline": {
+    "readOnlyMethods": ["GET", "HEAD", "OPTIONS"],
+    "stateChangingMethods": ["POST", "PUT", "PATCH", "DELETE"],
+    "readOnlyBaseScore": 5,
+    "stateChangingBaseScore": 30
+  },
+  "rules": [
+    {
+      "id": "token_valid",
+      "group": "token",
+      "headers": ["X-CSRF-Token", "X-XSRF-Token"],
+      "condition": "present_and_valid",
+      "weight": -40
+    },
+    {
+      "id": "token_missing",
+      "group": "token",
+      "headers": ["X-CSRF-Token", "X-XSRF-Token"],
+      "condition": "missing_on_state_changing_request",
+      "weight": 35
+    },
+    {
+      "id": "token_invalid",
+      "group": "token",
+      "headers": ["X-CSRF-Token", "X-XSRF-Token"],
+      "condition": "present_but_invalid",
+      "weight": 45
+    },
+    {
+      "id": "samesite_strict",
+      "group": "samesite",
+      "header": "Set-Cookie",
+      "attribute": "SameSite",
+      "condition": "equals_strict",
+      "weight": -25
+    },
+    {
+      "id": "samesite_lax",
+      "group": "samesite",
+      "header": "Set-Cookie",
+      "attribute": "SameSite",
+      "condition": "equals_lax",
+      "weight": -15
+    },
+    {
+      "id": "samesite_none_without_secure",
+      "group": "samesite",
+      "header": "Set-Cookie",
+      "attribute": "SameSite",
+      "condition": "equals_none_without_secure",
+      "weight": 30
+    },
+    {
+      "id": "samesite_none_with_secure",
+      "group": "samesite",
+      "header": "Set-Cookie",
+      "attribute": "SameSite",
+      "condition": "equals_none_with_secure",
+      "weight": 15
+    },
+    {
+      "id": "samesite_missing",
+      "group": "samesite",
+      "header": "Set-Cookie",
+      "attribute": "SameSite",
+      "condition": "attribute_missing",
+      "weight": 20
+    },
+    {
+      "id": "secfetchsite_same_origin",
+      "group": "secfetch",
+      "header": "Sec-Fetch-Site",
+      "condition": "equals_same_origin",
+      "weight": -20
+    },
+    {
+      "id": "secfetchsite_same_site",
+      "group": "secfetch",
+      "header": "Sec-Fetch-Site",
+      "condition": "equals_same_site",
+      "weight": -10
+    },
+    {
+      "id": "secfetchsite_cross_site",
+      "group": "secfetch",
+      "header": "Sec-Fetch-Site",
+      "condition": "equals_cross_site_on_state_changing_request",
+      "weight": 35
+    },
+    {
+      "id": "secfetchsite_none",
+      "group": "secfetch",
+      "header": "Sec-Fetch-Site",
+      "condition": "equals_none",
+      "weight": -5
+    },
+    {
+      "id": "secfetchmode_navigate_suspicious",
+      "group": "secfetch",
+      "header": "Sec-Fetch-Mode",
+      "condition": "equals_navigate_on_state_changing_api_request",
+      "weight": 10
+    },
+    {
+      "id": "secfetchdest_unexpected",
+      "group": "secfetch",
+      "header": "Sec-Fetch-Dest",
+      "condition": "unexpected_value_on_state_changing_request",
+      "values": ["image", "iframe", "object", "embed"],
+      "weight": 15
+    },
+    {
+      "id": "secfetch_headers_absent",
+      "group": "secfetch",
+      "headers": ["Sec-Fetch-Site", "Sec-Fetch-Mode", "Sec-Fetch-Dest"],
+      "condition": "all_absent",
+      "weight": 10
+    },
+    {
+      "id": "origin_matches",
+      "group": "origin_referer",
+      "header": "Origin",
+      "condition": "present_and_matches_server_domain",
+      "weight": -20
+    },
+    {
+      "id": "origin_mismatch",
+      "group": "origin_referer",
+      "header": "Origin",
+      "condition": "present_and_mismatches_server_domain",
+      "weight": 40
+    },
+    {
+      "id": "referer_matches_origin_absent",
+      "group": "origin_referer",
+      "header": "Referer",
+      "condition": "present_and_matches_while_origin_absent",
+      "weight": -10
+    },
+    {
+      "id": "referer_mismatch",
+      "group": "origin_referer",
+      "header": "Referer",
+      "condition": "present_and_mismatches_server_domain",
+      "weight": 35
+    },
+    {
+      "id": "origin_and_referer_absent",
+      "group": "origin_referer",
+      "headers": ["Origin", "Referer"],
+      "condition": "both_absent_on_state_changing_request",
+      "weight": 25
+    }
+  ],
+  "combinations": [
+    {
+      "id": "full_protection_override",
+      "description": "full_protection",
+      "conditions": [
+        "token_valid",
+        "samesite_strict",
+        "secfetchsite_same_origin",
+        "origin_matches"
+      ],
+      "type": "override",
+      "overrideScoreRange": { "min": 0, "max": 5 }
+    },
+    {
+      "id": "full_exposure_bonus",
+      "description": "classic_csrf_attack_pattern",
+      "conditions": [
+        "token_missing",
+        "samesite_none_without_secure",
+        "secfetchsite_cross_site",
+        "origin_mismatch_or_absent"
+      ],
+      "type": "bonus",
+      "bonusWeight": 20
+    },
+    {
+      "id": "header_spoofing_suspicion",
+      "description": "origin_secfetch_contradiction",
+      "conditions": [
+        "origin_matches",
+        "secfetchsite_cross_site"
+      ],
+      "type": "bonus",
+      "bonusWeight": 30
+    },
+    {
+      "id": "weak_but_partial_protection_cap",
+      "description": "browser_level_protection_present_without_token",
+      "conditions": [
+        "token_missing",
+        "samesite_strict_or_lax",
+        "secfetchsite_same_origin_or_same_site"
+      ],
+      "type": "cap",
+      "capMaxScore": 35
+    }
+  ],
+  "calculationFlow": [
+    "set score to baseline value based on request method",
+    "apply all matching rules from groups token, samesite, secfetch, origin_referer",
+    "evaluate combinations and apply override, bonus or cap as defined",
+    "clamp final score between score.min and score.max",
+    "map final score to riskBands",
+    "if score >= 80 trigger alert CRITICAL CSRF ALERT"
+  ]
+}
