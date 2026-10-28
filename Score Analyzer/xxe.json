@@ -1,0 +1,196 @@
+{
+  "ruleset": "xxe_possibility_score",
+  "version": "1.0",
+  "scannerType": "passive",
+  "score": {
+    "min": 0,
+    "max": 100
+  },
+  "riskBands": [
+    { "label": "Safe", "min": 0, "max": 19 },
+    { "label": "Low", "min": 20, "max": 39 },
+    { "label": "Medium", "min": 40, "max": 59 },
+    { "label": "High", "min": 60, "max": 79 },
+    { "label": "Critical", "min": 80, "max": 100, "alert": "CRITICAL XXE ALERT" }
+  ],
+  "applicability": {
+    "triggerConditions": [
+      "request_content_type_is_xml_related",
+      "request_body_contains_xml_pattern"
+    ],
+    "xmlContentTypes": ["application/xml", "text/xml", "application/soap+xml"],
+    "notApplicableScore": 0
+  },
+  "baseline": {
+    "xmlContentTypeBaseScore": 25,
+    "nonXmlBaseScore": 0
+  },
+  "rules": [
+    {
+      "id": "content_type_xml",
+      "group": "request_headers",
+      "header": "Content-Type",
+      "condition": "equals_xml_related_value",
+      "weight": 10
+    },
+    {
+      "id": "soapaction_present",
+      "group": "request_headers",
+      "header": "SOAPAction",
+      "condition": "present",
+      "weight": 10
+    },
+    {
+      "id": "server_fingerprint_legacy_xml_library",
+      "group": "request_headers",
+      "header": "X-Powered-By",
+      "condition": "indicates_legacy_or_vulnerable_xml_library",
+      "weight": 15
+    },
+    {
+      "id": "response_csp_present",
+      "group": "response_headers",
+      "header": "Content-Security-Policy",
+      "condition": "strict_policy_present",
+      "weight": -5
+    },
+    {
+      "id": "response_content_type_strict_json",
+      "group": "response_headers",
+      "header": "Content-Type",
+      "condition": "strictly_set_to_application_json",
+      "weight": -15
+    },
+    {
+      "id": "xml_prolog_detected",
+      "group": "body_content",
+      "pattern": "<?xml",
+      "condition": "pattern_found_in_request_body",
+      "weight": 60,
+      "note": "primary_confirmation_signal_real_xml_parser_endpoint_observed_in_traffic"
+    },
+    {
+      "id": "doctype_declaration_detected",
+      "group": "body_content",
+      "pattern": "<!DOCTYPE",
+      "condition": "pattern_found_in_request_body",
+      "weight": 20
+    },
+    {
+      "id": "entity_declaration_detected",
+      "group": "body_content",
+      "pattern": "<!ENTITY",
+      "condition": "pattern_found_in_request_body",
+      "weight": 30
+    },
+    {
+      "id": "system_external_reference_detected",
+      "group": "body_content",
+      "pattern": "SYSTEM",
+      "condition": "pattern_found_with_external_uri_reference",
+      "weight": 45
+    },
+    {
+      "id": "public_external_dtd_detected",
+      "group": "body_content",
+      "pattern": "PUBLIC",
+      "condition": "pattern_found_with_external_dtd_reference",
+      "weight": 35
+    },
+    {
+      "id": "parameter_entity_detected",
+      "group": "body_content",
+      "pattern": "%xxe;",
+      "condition": "parameter_entity_usage_found",
+      "weight": 40
+    },
+    {
+      "id": "clean_xml_no_doctype_entity",
+      "group": "body_content",
+      "condition": "xml_present_without_doctype_or_entity",
+      "weight": -10
+    },
+    {
+      "id": "filesystem_content_in_response",
+      "group": "response_body",
+      "indicator": "filesystem_content_leak",
+      "examplePatterns": ["root:x:0:0", "/etc/passwd", "[extensions]", "win.ini"],
+      "condition": "present_in_html_response",
+      "weight": 50
+    },
+    {
+      "id": "xml_parser_error_in_response",
+      "group": "response_body",
+      "indicator": "xml_parser_error_message",
+      "examplePatterns": ["DOCTYPE is not allowed", "External Entity", "libxml", "SAXParseException"],
+      "condition": "present_in_html_response",
+      "weight": 25
+    },
+    {
+      "id": "generic_server_error_in_response",
+      "group": "response_body",
+      "indicator": "generic_500_error_without_stacktrace",
+      "condition": "present_in_html_response",
+      "weight": 5
+    },
+    {
+      "id": "no_xml_related_trace_in_response",
+      "group": "response_body",
+      "condition": "no_xml_error_or_leak_detected",
+      "weight": -10
+    }
+  ],
+  "combinations": [
+    {
+      "id": "confirmed_xxe_override",
+      "description": "external_entity_reference_with_filesystem_leak",
+      "conditions": [
+        "system_external_reference_detected_or_public_external_dtd_detected",
+        "filesystem_content_in_response"
+      ],
+      "type": "override",
+      "overrideScoreRange": { "min": 95, "max": 100 }
+    },
+    {
+      "id": "parser_active_no_payload_cap",
+      "description": "xml_content_type_without_doctype_entity_and_no_parser_error",
+      "conditions": [
+        "content_type_xml",
+        "clean_xml_no_doctype_entity",
+        "no_xml_related_trace_in_response"
+      ],
+      "type": "cap",
+      "capMaxScore": 15
+    },
+    {
+      "id": "blind_xxe_suspicion_bonus",
+      "description": "parameter_entity_with_external_system_reference_no_visible_output",
+      "conditions": [
+        "parameter_entity_detected",
+        "system_external_reference_detected",
+        "no_xml_related_trace_in_response"
+      ],
+      "type": "bonus",
+      "bonusWeight": 15
+    },
+    {
+      "id": "strict_response_protection_cap",
+      "description": "response_content_type_json_enforced_no_xml_leak",
+      "conditions": [
+        "response_content_type_strict_json",
+        "no_xml_related_trace_in_response"
+      ],
+      "type": "cap",
+      "capMaxScore": 20
+    }
+  ],
+  "calculationFlow": [
+    "check applicability.triggerConditions; if none match, score = notApplicableScore and rule set is skipped",
+    "set score to baseline value based on request content type",
+    "apply all matching rules from groups request_headers, response_headers, body_content, response_body",
+    "evaluate combinations and apply override, bonus or cap as defined",
+    "clamp final score between score.min and score.max",
+    "map final score to riskBands",
+    "if score >= 80 trigger alert CRITICAL XXE ALERT"
+  ]
+}
